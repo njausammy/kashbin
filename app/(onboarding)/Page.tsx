@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, VStack, Text, Heading, Image } from '@gluestack-ui/themed'
+import { Box, VStack, Text, Heading, Image, StatusBar } from '@gluestack-ui/themed'
 import { Dimensions } from 'react-native'
 type PageProps = {
   imageKey: number | string
@@ -22,9 +22,11 @@ const Page = ({
   title,
   WelcomeImage,
   imageHeight,
+  
 }: PageProps) => {
   return (
     <VStack>
+
       <Box
       >
         <Image
@@ -37,7 +39,7 @@ const Page = ({
 
         />
       </Box>
-      <Box marginTop={getHeight(100)} paddingHorizontal={16} height={getHeight(131)}>
+      <Box marginTop={getHeight(60)} paddingHorizontal={24}>
         <Heading
           textAlign="center"
           lineHeight={41}
@@ -45,6 +47,7 @@ const Page = ({
           fontSize={34}
           fontWeight={600}
           fontFamily="$heading"
+          padding={30}
         >
 
           {title}

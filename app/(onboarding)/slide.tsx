@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { router } from 'expo-router';
+import { StyleSheet,  Dimensions } from 'react-native';
 import { Box, Button, Text, VStack } from "@gluestack-ui/themed";
 import PagerView, { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
+
 
 import Page from './Page';
 import Dot from './Dot';
@@ -13,6 +15,8 @@ const Image3 = require('../../assets/images/friends.png');
 export interface PageInterface {
   title: string;
   WelcomeImg: any;
+  top: number;
+  indicatorTop: string
 }
 
 export interface PageControlRef {
@@ -25,14 +29,20 @@ export const SLIDER_DATA: PageInterface[] = [
   {
     title: 'Karibu, pata points unaponunua bidhaa kwa duka!  ',
     WelcomeImg: Image1,
+    top: 142,
+    indicatorTop: '43%'
   },
   {
-    title: 'Tumia points kununua bidhaa kwa duka.!',
+    title: 'Tumia points kununua bidhaa kwa duka!',
     WelcomeImg: Image2,
+    top: 142,
+    indicatorTop: '43%'
   },
   {
-    title: 'Sambaza Zawadi Leo!',
+    title: 'Sambaza points na marafiki!',
     WelcomeImg: Image3,
+    top: 142,
+    indicatorTop: '43%'
   },
 ];
 
@@ -55,36 +65,26 @@ const Slide = () => {
     pageControlRef.current?.didSelectPage(e.nativeEvent.position);
   };
 
-  const handleOnboard = async () => {
-    // await setItem('isOnboarded', 'onboarded');
-  };
-
-  const handleToLogin = () => {
-    handleOnboard();
-  };
 
   const handleNext = async () => {
     if (currentPage === 2) {
-      handleOnboard();
+      router.replace('/home');
     } else {
       pageRef.current?.setPage(currentPage + 1);
     }
   };
 
-  const handleBack = async () => {
-    pageRef.current?.setPage(currentPage - 1);
-  };
-
 
   return (
     <Box backgroundColor="$white" flex={1}>
-      <Box mt={topMargin} height={getHeight(600)}>
+      <Box top={142}  height={getHeight(600)}>
         <PagerView
           style={styles.pagerView}
           initialPage={initial}
           ref={pageRef}
           onPageSelected={onPageSelected}
           useNext
+
         >
           {SLIDER_DATA.map((item, index) => (
             <Page
@@ -98,7 +98,7 @@ const Slide = () => {
         </PagerView>
       </Box>
 
-      <Box top={'43%'} alignSelf="center" position="absolute" mt={getHeight(30)}>
+      <Box top={'50%'} alignSelf="center" position="absolute" mt={getHeight(30)}>
         <VStack alignSelf="center" flexDirection="row">
           {SLIDER_DATA.map((_, index) => (
             <Dot key={index.toString()} index={index} currentPage={currentPage} />
@@ -111,7 +111,7 @@ const Slide = () => {
         borderRadius={50}
         paddingHorizontal={10}
         onPress={handleNext}
-        marginTop={30}
+        marginTop={70}
         height={56}
         width={360}
         alignSelf="center"
