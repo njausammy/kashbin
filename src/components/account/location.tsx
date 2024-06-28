@@ -12,7 +12,7 @@ import {
 } from '@gluestack-ui/themed';
 import { Image, } from 'react-native';
 
-const LocationScreen = () => {
+const LocationDetails = () => {
     const { control, handleSubmit, watch } = useForm({
         defaultValues: {
             street: '',
@@ -39,7 +39,7 @@ const LocationScreen = () => {
     return (
         <VStack paddingTop={68} backgroundColor="$white" flex={1}>
                         <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../assets/images/caret-back.png')} />
+                <Image source={require('../../../assets/images/caret-back.png')} />
             </Box>
             <Box>
                 <Progress value={100} width="$full" height={4} size="md" backgroundColor="#F7F7F7">
@@ -181,4 +181,4 @@ const LocationScreen = () => {
     );
 };
 
-export default LocationScreen;
+export default LocationDetails;

@@ -10,7 +10,7 @@ export default function RootLayout() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="(onboarding)" />
+        <Stack.Screen name="index" />
       </Stack>
     </GluestackUIProvider>
   );

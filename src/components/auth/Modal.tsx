@@ -13,7 +13,7 @@ interface Iprops {
 const SignupModal = ({ onClose, isOpen }: Iprops) => {
     
     const handleYes = async () => {
-        router.replace('/confirm');
+        router.replace('/auth/confirm');
     };
 
     return (
@@ -33,7 +33,7 @@ const SignupModal = ({ onClose, isOpen }: Iprops) => {
                 <ModalBody>
                     <VStack space="md" alignItems="center">
                         <Box alignSelf="center" marginBottom={24}>
-                            <Image source={require('../../assets/images/elipsis.png')} />
+                            <Image source={require('../../../assets/images/elipsis.png')} />
                         </Box>
                         <Heading alignSelf="center" lineHeight={28} color="#2A2A2A" fontSize={22} fontWeight={600}>Verify your phone number.</Heading>
                         <Text alignSelf="center" lineHeight={19} color="#5A5A5A" fontSize={14} fontWeight={600}>

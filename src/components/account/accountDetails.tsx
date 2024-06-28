@@ -28,14 +28,14 @@ const AccountView = () => {
 
 
     const handleNext = async () => {
-        router.replace('/location');
+        router.replace('/account/location');
     };
 
 
     return (
         <VStack paddingTop={68} backgroundColor="$white" flex={1}>
                         <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../assets/images/caret-back.png')} />
+                <Image source={require('../../../assets/images/caret-back.png')} />
             </Box>
             <Box>
                 <Progress value={50} width="$full" height={4} size="md" backgroundColor='#F7F7F7'>

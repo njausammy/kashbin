@@ -3,22 +3,22 @@ import { Image, } from 'react-native';
 import { Box, Button, Text, VStack, Pressable, Progress, ProgressFilledTrack } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
 
-const Slide = () => {
+const AuthHomeScreen = () => {
 
     const handleSignup = async () => {
-        router.replace('/signup');
+        router.replace('/auth/signup');
     };
 
     return (
         <VStack paddingTop={70} backgroundColor="$white" flex={1} alignItems="center">
             <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../assets/images/caret-back.png')} />
+                <Image source={require('../../../assets/images/caret-back.png')} />
             </Box>
             <Progress value={20} width="$full" height={4} size="md" backgroundColor='#F7F7F7' >
                 <ProgressFilledTrack backgroundColor='#DB1E36' />
             </Progress>
             <Box alignSelf="center" marginTop={24}>
-                <Image source={require('../../assets/images/signup-home.png')} />
+                <Image source={require('../../../assets/images/signup-home.png')} />
             </Box>
             <Text color='#2A2A2A' marginVertical={72} alignSelf="center" fontSize={28} fontWeight={600} lineHeight={34}>
                 Create your account
@@ -63,4 +63,4 @@ const Slide = () => {
     );
 };
 
-export default Slide;
+export default AuthHomeScreen;

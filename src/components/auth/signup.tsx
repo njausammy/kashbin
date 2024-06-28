@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
 import { Box, Button, Input, InputField, Progress, ProgressFilledTrack, Text, VStack } from "@gluestack-ui/themed";
-import PhoneNumberInput from '../input';
+import PhoneNumberInput from '../form/PhoneInput';
 import SignupModal from './Modal';
 import { Image, } from 'react-native';
 
@@ -38,7 +38,7 @@ const Signup = () => {
         <SignupModal isOpen={showModal} onClose={toggleModal} />
             <VStack paddingTop={70} backgroundColor="$white" flex={1}>
             <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../assets/images/caret-back.png')} />
+                <Image source={require('../../../assets/images/caret-back.png')} />
             </Box>
                 <Box>
 

@@ -4,7 +4,7 @@ import { Box, Button, HStack, Input, InputField, Progress, ProgressFilledTrack, 
 import { router } from 'expo-router';
 import { Image, } from 'react-native';
 
-const Confirm = () => {
+const ConfirmSignup = () => {
     const { handleSubmit, control, getValues, setValue } = useForm()
     const [code, setCode] = useState(['', '', '', '', '', '']);
     const [progress, setProgress] = useState(80)
@@ -35,14 +35,14 @@ const Confirm = () => {
 
 
     const handleVerify = async () => {
-        router.replace('/account');
+        router.replace('/account/account-details');
     };
 
 
     return (
         <VStack paddingTop={70} backgroundColor="$white" flex={1}>
             <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../assets/images/caret-back.png')} />
+                <Image source={require('../../../assets/images/caret-back.png')} />
             </Box>
             <Box>
                 <Progress value={progress} width="$full" height={4} size="md" backgroundColor='#F7F7F7'>
@@ -108,4 +108,4 @@ const Confirm = () => {
     );
 };
 
-export default Confirm;
+export default ConfirmSignup;

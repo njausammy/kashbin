@@ -8,9 +8,9 @@ import PagerView, { PagerViewOnPageSelectedEvent } from 'react-native-pager-view
 import Page from './Page';
 import Dot from './Dot';
 
-const Image1 = require('../../assets/images/nyl-logo.png');
-const Image2 = require('../../assets/images/shop.png');
-const Image3 = require('../../assets/images/friends.png');
+const Image1 = require('../../../assets/images/nyl-logo.png');
+const Image2 = require('../../../assets/images/shop.png');
+const Image3 = require('../../../assets/images/friends.png');
 
 export interface PageInterface {
   title: string;
@@ -54,7 +54,7 @@ export const getHeight = (height: number) => {
   return (height / 884) * deviceHeight;
 };
 
-const Slide = () => {
+const OnboardingSlide = () => {
   const initial = 0;
   const [currentPage, setCurrentPage] = useState(initial);
   const pageRef = useRef<PagerView>(null);
@@ -68,7 +68,7 @@ const Slide = () => {
 
   const handleNext = async () => {
     if (currentPage === 2) {
-      router.replace('/home');
+      router.replace('/auth/home');
     } else {
       pageRef.current?.setPage(currentPage + 1);
     }
@@ -123,7 +123,7 @@ const Slide = () => {
   );
 };
 
-export default Slide;
+export default OnboardingSlide;
 
 const styles = StyleSheet.create({
   pagerView: {
