@@ -9,6 +9,10 @@ const AuthHomeScreen = () => {
         router.replace('/auth/signup');
     };
 
+    const handleLogin= async () => {
+        router.replace('/auth/login');
+    };
+
     return (
         <VStack paddingTop={70} backgroundColor="$white" flex={1} alignItems="center">
             <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
@@ -45,6 +49,8 @@ const AuthHomeScreen = () => {
                 width={360}
                 alignSelf="center"
                 marginBottom={40}
+                onPress={handleLogin}
+
             >
                 <Text
                     color='#DB1E36'
