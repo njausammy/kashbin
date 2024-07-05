@@ -43,4 +43,4 @@ To learn more about developing your project with Expo, look at the following res
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
 ## Deployment
-[Android](https://expo.dev/artifacts/eas/8XSXeYdQQbfp3mAhf5pAwu.apk)
+[Android](https://expo.dev/artifacts/eas/eQpwU6qmXgzdeuKCX6gjL8.apk)
