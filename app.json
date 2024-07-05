@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "niyaleo-mobile",
+    "name": "NiYaLeo",
     "slug": "niyaleo-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,13 +12,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nyakaru.niyaleomobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/shop.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nyakaru.niyaleomobile"
     },
     "web": {
       "bundler": "metro",
@@ -30,6 +32,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "28b207ba-7180-45f4-9586-a60cd4b350ca"
+      }
+    },
+    "owner": "nyakaru"
   }
 }
