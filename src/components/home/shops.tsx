@@ -7,14 +7,20 @@ import {
 import Icon from '@expo/vector-icons/Ionicons';
 import FontAwesomeIcon from '@expo/vector-icons/FontAwesome';
 
+import NearIcon from "../../components/Icons/near-me"
+import GiftsIcon from "../../components/Icons/gifts"
+import ServicesIcon from "../../components/Icons/people-solid"
+import ShopsIcon from "../../components/Icons/all-shops"
+
+
 export const SecondaryNavigation = ({ onNavigate, activeItem }: {
     onNavigate: (path: string) => void; activeItem: string
 }) => (
     <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem icon={require(`../../../assets/icons/near.png`)} label="Near Me" onPress={() => onNavigate('/points')} />
-        <NavItem icon={require(`../../../assets/icons/gifts.png`)} label="Gifts" onPress={() => onNavigate('/points')} />
-        <NavItem icon={require(`../../../assets/icons/services.png`)} label="Services" onPress={() => onNavigate('/points')} />
-        <NavItem icon={require(`../../../assets/icons/all-shops.png`)} label="All Shops" onPress={() => onNavigate('/points')} />
+        <NavItem   icon={<NearIcon />} label="Near Me" onPress={() => onNavigate('/points')} />
+        <NavItem icon={<GiftsIcon />}  label="Gifts" onPress={() => onNavigate('/points')} />
+        <NavItem icon={<ServicesIcon />} label="Services" onPress={() => onNavigate('/points')} />
+        <NavItem icon={<ShopsIcon />} label="All Shops" onPress={() => onNavigate('/points')} />
     </HStack>
 );
 
@@ -54,7 +60,7 @@ const ShopsScreen = () => {
                     <Text color="white" fontSize={16}>Kahawa Sukari</Text>
                 </HStack>
                 <Card paddingVertical={10} backgroundColor='#FFFFFF'>
-                    <TopNavigation onNavigate={handleNavigation} />
+                    <TopNavigation activeTab="shops" onNavigate={handleNavigation} />
                 </Card>
             </Box>
             <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>

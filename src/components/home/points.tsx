@@ -4,6 +4,13 @@ import { router } from 'expo-router';
 import { NavItem, TopNavigation } from './navigation';
 import Icon from '@expo/vector-icons/Ionicons';
 
+import PointsIcon from "../../components/Icons/points"
+import OffersIcon from "../../components/Icons/offers"
+import DealsIcon from "../../components/Icons/deals"
+import CouponsIcon from "../../components/Icons/coupons"
+
+
+
 interface ITransfer {
     icon: string;
     name: string;
@@ -20,10 +27,10 @@ const SecondaryNavigation = ({ onNavigate, activeItem }: {
     onNavigate: (path: string) => void; activeItem: string
 }) => (
     <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem icon={require(`../../../assets/icons/points.png`)} label="Near Me" onPress={() => onNavigate('/points')} />
-        <NavItem icon={require(`../../../assets/icons/offers.png`)} label="Gifts" onPress={() => onNavigate('/points')} />
-        <NavItem icon={require(`../../../assets/icons/deals.png`)} label="Services" onPress={() => onNavigate('/points')} />
-        <NavItem icon={require(`../../../assets/icons/coupons.png`)} label="All Shops" onPress={() => onNavigate('/points')} />
+        <NavItem icon={<PointsIcon />}  label="Points" onPress={() => onNavigate('/points')} />
+        <NavItem icon={<OffersIcon />} label="Offers" onPress={() => onNavigate('/points')} />
+        <NavItem icon={<DealsIcon />}  label="Deals" onPress={() => onNavigate('/points')} />
+        <NavItem icon={<CouponsIcon />}  label="Coupons" onPress={() => onNavigate('/points')} />
     </HStack>
 );
 
@@ -64,7 +71,7 @@ const PointsTransferScreen = () => {
             <Box paddingTop={52} marginBottom={10} backgroundColor="#DB1E36" paddingBottom={10} paddingHorizontal={10}>
 
                 <Card paddingVertical={10} backgroundColor='#FFFFFF'>
-                    <TopNavigation onNavigate={handleNavigation} />
+                    <TopNavigation activeTab="points" onNavigate={handleNavigation} />
                 </Card>
             </Box>
             <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
@@ -93,7 +100,7 @@ const PointsTransferScreen = () => {
                     backgroundColor='#FFFFFF'
                     paddingHorizontal={10}
                     height={27}
-                    width={76}
+                    width={110}
                     alignSelf="flex-end"
                     marginTop={20}
                     marginBottom={20}

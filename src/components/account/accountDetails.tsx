@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Box, Button, Input, InputField, Progress, ProgressFilledTrack, Text, VStack } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
 import { Image, } from 'react-native';
+import PageHeader from '../PageHeader';
 
 const AccountView = () => {
     const { control, handleSubmit, watch } = useForm({
@@ -28,20 +29,15 @@ const AccountView = () => {
 
 
     const handleNext = async () => {
-        router.replace('/account/location');
+        router.push('/account/location');
     };
 
 
     return (
-        <VStack paddingTop={68} backgroundColor="$white" flex={1}>
-                        <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../../assets/images/caret-back.png')} />
-            </Box>
-            <Box>
-                <Progress value={50} width="$full" height={4} size="md" backgroundColor='#F7F7F7'>
-                    <ProgressFilledTrack backgroundColor='#DB1E36' />
-                </Progress>
-            </Box>
+        <VStack backgroundColor="$white" flex={1}>
+    
+            <PageHeader value={50} />
+
             <VStack marginTop={24} paddingHorizontal={24}>
                 <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>
                     Own your account

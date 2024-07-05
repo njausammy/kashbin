@@ -68,7 +68,7 @@ const OnboardingSlide = () => {
 
   const handleNext = async () => {
     if (currentPage === 2) {
-      router.replace('/auth/home');
+      router.push('/auth/home');
     } else {
       pageRef.current?.setPage(currentPage + 1);
     }

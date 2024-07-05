@@ -11,6 +11,8 @@ import {
     VStack,
 } from '@gluestack-ui/themed';
 import { Image, } from 'react-native';
+import PageHeader from '../PageHeader';
+import { router } from 'expo-router';
 
 const LocationDetails = () => {
     const { control, handleSubmit, watch } = useForm({
@@ -36,16 +38,14 @@ const LocationDetails = () => {
 
     const isFormValid = street && landmark && apartment && neighborhood && townCity;
 
+    const handleContinue = async () => {
+        router.push('/auth/login');
+    };
+
+
     return (
-        <VStack paddingTop={68} backgroundColor="$white" flex={1}>
-                        <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../../assets/images/caret-back.png')} />
-            </Box>
-            <Box>
-                <Progress value={100} width="$full" height={4} size="md" backgroundColor="#F7F7F7">
-                    <ProgressFilledTrack backgroundColor="#DB1E36" />
-                </Progress>
-            </Box>
+        <VStack  backgroundColor="$white" flex={1}>
+            <PageHeader value={100} />
             <VStack marginTop={24} paddingHorizontal={24}>
                 <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>
                     Location
@@ -168,7 +168,7 @@ const LocationDetails = () => {
                     alignSelf="center"
                     marginBottom={30}
                     disabled={!isFormValid}
-                    onPress={handleSubmit(onSubmit)}
+                    onPress={handleContinue}
                 >
                     <Text color={isFormValid ? '$white' : '#5A5A5A'}>Continue</Text>
                 </Button>

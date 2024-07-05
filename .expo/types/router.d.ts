@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import type { TextProps, GestureResponderEvent } from 'react-native';
 
 export namespace ExpoRouter {
-  type StaticRoutes = `/` | `/_sitemap` | `/account/account-details` | `/account/location` | `/auth/confirm` | `/auth/home` | `/auth/login` | `/auth/signup` | `/home` | `/home/contacts` | `/home/points` | `/home/shops` | `/onboarding` | `/points/recipients`;
+  type StaticRoutes = `/` | `/_sitemap` | `/account/account-details` | `/account/location` | `/auth/confirm` | `/auth/home` | `/auth/login` | `/auth/signup` | `/contacts` | `/home` | `/main` | `/onboarding` | `/onboarding/welcome` | `/points` | `/points/recipients` | `/profile` | `/services` | `/shops`;
   type DynamicRoutes<T extends string> = never;
   type DynamicRouteTemplate = never;
 

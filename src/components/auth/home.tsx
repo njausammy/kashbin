@@ -2,25 +2,21 @@ import React from 'react';
 import { Image, } from 'react-native';
 import { Box, Button, Text, VStack, Pressable, Progress, ProgressFilledTrack } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
+import PageHeader from '../PageHeader';
 
 const AuthHomeScreen = () => {
 
     const handleSignup = async () => {
-        router.replace('/auth/signup');
+        router.push('/auth/signup');
     };
 
-    const handleLogin= async () => {
-        router.replace('/auth/login');
+    const handleLogin = async () => {
+        router.push('/auth/login');
     };
 
     return (
-        <VStack paddingTop={70} backgroundColor="$white" flex={1} alignItems="center">
-            <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../../assets/images/caret-back.png')} />
-            </Box>
-            <Progress value={20} width="$full" height={4} size="md" backgroundColor='#F7F7F7' >
-                <ProgressFilledTrack backgroundColor='#DB1E36' />
-            </Progress>
+        <VStack backgroundColor="$white" flex={1} alignItems="center">
+            <PageHeader value={20} />
             <Box alignSelf="center" marginTop={24}>
                 <Image source={require('../../../assets/images/signup-home.png')} />
             </Box>

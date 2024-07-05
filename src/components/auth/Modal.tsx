@@ -13,7 +13,8 @@ interface Iprops {
 const SignupModal = ({ onClose, isOpen }: Iprops) => {
     
     const handleYes = async () => {
-        router.replace('/auth/confirm');
+        onClose()
+        router.push('/auth/confirm');
     };
 
     return (

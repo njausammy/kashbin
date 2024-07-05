@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
-import { Box, Button, Input, InputField, Progress, ProgressFilledTrack, Text, VStack } from "@gluestack-ui/themed";
+import { Box, Button, Input, InputField,  Text, VStack } from "@gluestack-ui/themed";
 import PhoneNumberInput from '../form/PhoneInput';
-import SignupModal from './Modal';
-import { Image, } from 'react-native';
 import { router } from 'expo-router';
+import PageHeader from '../PageHeader';
 
 const Login = () => {
     const { control, watch } = useForm({
@@ -14,16 +13,11 @@ const Login = () => {
         }
     });
     const [isFormValid, setIsFormValid] = useState(false);
-    const [showModal, setShowModal] = useState(false);
     const [progress, setProgress] = useState(40)
 
-    const toggleModal = () => {
-        setShowModal((prev) => !prev)
-    }
 
     const handleLogin = () => {
-        router.replace('/home')
-        toggleModal()
+        router.push('/onboarding/welcome')
         setProgress(60)
     }
 
@@ -37,16 +31,9 @@ const Login = () => {
 
     return (
         <>
-            <SignupModal isOpen={showModal} onClose={toggleModal} />
-            <VStack paddingTop={70} backgroundColor="$white" flex={1}>
-                <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                    <Image source={require('../../../assets/images/caret-back.png')} />
-                </Box>
-                <Box>
-
-                    <Progress value={progress} width="$full" height={4} size="md" backgroundColor='#F7F7F7'>
-                        <ProgressFilledTrack backgroundColor='#DB1E36' />
-                    </Progress>
+            <VStack backgroundColor="$white" flex={1}>
+                <Box paddingHorizontal={15}>
+                    <PageHeader hideProgressBar value={progress} />
                 </Box>
                 <VStack marginTop={24} paddingHorizontal={24}>
                     <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>

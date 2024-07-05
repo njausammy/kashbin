@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Box, Button, HStack, Input, InputField, Progress, ProgressFilledTrack, Text, VStack } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
 import { Image, } from 'react-native';
+import PageHeader from '../PageHeader';
 
 const ConfirmSignup = () => {
     const { handleSubmit, control, getValues, setValue } = useForm()
@@ -35,20 +36,13 @@ const ConfirmSignup = () => {
 
 
     const handleVerify = async () => {
-        router.replace('/account/account-details');
+        router.push('/account/account-details');
     };
 
 
     return (
-        <VStack paddingTop={70} backgroundColor="$white" flex={1}>
-            <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../../assets/images/caret-back.png')} />
-            </Box>
-            <Box>
-                <Progress value={progress} width="$full" height={4} size="md" backgroundColor='#F7F7F7'>
-                    <ProgressFilledTrack backgroundColor='#DB1E36' />
-                </Progress>
-            </Box>
+        <VStack  backgroundColor="$white" flex={1}>
+            <PageHeader value={progress} />
             <VStack marginTop={24} paddingHorizontal={24}>
                 <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>
                     Confirm your phone number

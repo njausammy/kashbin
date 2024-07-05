@@ -4,6 +4,7 @@ import { Box, Button, Input, InputField, Progress, ProgressFilledTrack, Text, VS
 import PhoneNumberInput from '../form/PhoneInput';
 import SignupModal from './Modal';
 import { Image, } from 'react-native';
+import PageHeader from '../PageHeader';
 
 const Signup = () => {
     const { control, watch } = useForm({
@@ -14,13 +15,13 @@ const Signup = () => {
     });
     const [isFormValid, setIsFormValid] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [progress, setProgress] =useState(40)
+    const [progress, setProgress] = useState(40)
 
-    const toggleModal=()=>{
-        setShowModal((prev)=>!prev)
+    const toggleModal = () => {
+        setShowModal((prev) => !prev)
     }
 
-    const handleSignup =()=>{
+    const handleSignup = () => {
         toggleModal()
         setProgress(60)
     }
@@ -35,17 +36,9 @@ const Signup = () => {
 
     return (
         <>
-        <SignupModal isOpen={showModal} onClose={toggleModal} />
-            <VStack paddingTop={70} backgroundColor="$white" flex={1}>
-            <Box width="$full" justifyContent="flex-start" alignItems="flex-start" padding={5}>
-                <Image source={require('../../../assets/images/caret-back.png')} />
-            </Box>
-                <Box>
-
-                    <Progress value={progress} width="$full" height={4} size="md" backgroundColor='#F7F7F7'>
-                        <ProgressFilledTrack backgroundColor='#DB1E36' />
-                    </Progress>
-                </Box>
+            <SignupModal isOpen={showModal} onClose={toggleModal} />
+            <VStack  backgroundColor="$white" flex={1}>
+                <PageHeader value={progress} />
                 <VStack marginTop={24} paddingHorizontal={24}>
                     <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>
                         Create an account

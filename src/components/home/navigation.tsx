@@ -1,29 +1,33 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { HStack, Image } from "@gluestack-ui/themed";
-import { Pressable, VStack,  Text } from "@gluestack-ui/themed";
+import { Pressable, VStack, Text } from "@gluestack-ui/themed";
+
+import ShopIcon from "../../components/Icons/shop"
+import PointsIcon from "../../components/Icons/points"
+import PeopleIcon from "../../components/Icons/people"
+
+
 
 export const NavItem = ({ icon, label, onPress }: {
-    icon: string;
+    icon: ReactNode;
     label: string;
     onPress: () => void
 }) => (
     <Pressable onPress={onPress}>
         <VStack alignItems="center">
-            <Image source={icon} style={{ width: 32, height: 32 }} alt={label} />
+            {icon}
             <Text fontSize={12}>{label}</Text>
         </VStack>
     </Pressable>
 );
 
-export const TopNavigation = ({ onNavigate }: { onNavigate: (path: string) => void }) => (
+export const TopNavigation = ({ onNavigate, activeTab }: { onNavigate: (path: string) => void, activeTab: "shops" | 'points' | 'people' }) => (
     <HStack justifyContent="space-around"  >
-        <NavItem icon={require(`../../../assets/icons/shop.png`)} label="Shops" onPress={() => onNavigate('/shops')} />
-        <NavItem icon={require(`../../../assets/icons/points.png`)} label="Points" onPress={() => onNavigate('/points')} />
-        <NavItem icon={require(`../../../assets/icons/people.png`)} label="Contacts" onPress={() => onNavigate('/contacts')} />
+        <NavItem icon={<ShopIcon color={activeTab === "shops" ? "#DB1E36" : "#5A5A5A"} />} label="Shops" onPress={() => onNavigate('/main/home')} />
+        <NavItem icon={<PointsIcon color={activeTab === "points" ? "#DB1E36" : "#5A5A5A"} />} label="Points" onPress={() => onNavigate('/main/points')} />
+        <NavItem icon={<PeopleIcon color={activeTab === "people" ? "#DB1E36" : "#5A5A5A"} />} label="Contacts" onPress={() => onNavigate('/main/contacts')} />
     </HStack>
 );
-
-
 
 
 export const SecondaryNavItem = ({ icon, label, onPress, isActive }: {
