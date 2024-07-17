@@ -1,7 +1,7 @@
-import HomeScreen from "@/src/components/onboarding/welcome";
+import Welcome from "@/src/components/onboarding/welcome";
 
-export default function LoginScreen() {
+export default function OnboardingWelcomeScreen() {
   return (
-    <HomeScreen />
+    <Welcome />
   );
 }

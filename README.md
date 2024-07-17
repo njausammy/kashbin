@@ -43,4 +43,9 @@ To learn more about developing your project with Expo, look at the following res
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
 ## Deployment
+- app:bundleRelease - This command generates an Android App Bundle (.aab) file, which is the recommended format for publishing apps on the Google Play Store.
+
+- app:assembleRelease - This command generates a standard Android Package (.apk) file, which can be used for manual installation or publishing on alternative app stores.
+
+
 [Android](https://expo.dev/artifacts/eas/eQpwU6qmXgzdeuKCX6gjL8.apk)

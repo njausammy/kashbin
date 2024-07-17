@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
-import { Box, Button, Input, InputField, Progress, ProgressFilledTrack, Text, VStack } from "@gluestack-ui/themed";
+import { useCreateEntity } from '@/src/api/queries';
+import { Button, Input, InputField, Text, VStack, Spinner } from "@gluestack-ui/themed";
 import PhoneNumberInput from '../form/PhoneInput';
 import SignupModal from './Modal';
-import { Image, } from 'react-native';
 import PageHeader from '../PageHeader';
 
+interface IFormValues {
+    phone: string
+    password: string
+}
+
 const Signup = () => {
-    const { control, watch } = useForm({
+    const { control, watch, handleSubmit } = useForm({
         defaultValues: {
             phone: '',
             password: ''
         }
     });
+
+    const { handleCreateEntity, isLoading } = useCreateEntity("users/signup", undefined, undefined, false)
+
     const [isFormValid, setIsFormValid] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [progress, setProgress] = useState(40)
@@ -21,11 +29,22 @@ const Signup = () => {
         setShowModal((prev) => !prev)
     }
 
-    const handleSignup = () => {
-        toggleModal()
-        setProgress(60)
-    }
 
+    const handleSignup = async (data: IFormValues) => {
+        try {
+            await handleCreateEntity({
+                phone_number: data.phone,
+                password: data.password
+            }, {
+                onSuccess() {
+                    setProgress(60);
+                    toggleModal();
+                },
+            });
+        } catch (error) {
+            console.error("Error creating account:", error);
+        }
+    };
 
     const phone = watch('phone');
     const password = watch('password');
@@ -37,7 +56,7 @@ const Signup = () => {
     return (
         <>
             <SignupModal isOpen={showModal} onClose={toggleModal} />
-            <VStack  backgroundColor="$white" flex={1}>
+            <VStack backgroundColor="$white" flex={1}>
                 <PageHeader value={progress} />
                 <VStack marginTop={24} paddingHorizontal={24}>
                     <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>
@@ -84,13 +103,17 @@ const Signup = () => {
                         alignSelf="center"
                         marginBottom={30}
                         disabled={!isFormValid}
-                        onPress={handleSignup}
+                        onPress={handleSubmit(handleSignup)}
                     >
-                        <Text
-                            color={isFormValid ? '$white' : '#5A5A5A'}
-                        >
-                            Sign up
-                        </Text>
+                        {isLoading ? (
+                            <Spinner color='$white' />
+                        ) : (
+                            <Text
+                                color={isFormValid ? '$white' : '#5A5A5A'}
+                            >
+                                Sign up
+                            </Text>
+                        )}
                     </Button>
                 </VStack>
             </VStack>

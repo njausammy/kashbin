@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { router } from 'expo-router';
-import { StyleSheet,  Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Box, Button, Text, VStack } from "@gluestack-ui/themed";
 import PagerView, { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
 
@@ -77,13 +77,12 @@ const OnboardingSlide = () => {
 
   return (
     <Box backgroundColor="$white" flex={1}>
-      <Box top={142}  height={getHeight(600)}>
+      <Box top={142} height={getHeight(600)}>
         <PagerView
           style={styles.pagerView}
           initialPage={initial}
           ref={pageRef}
           onPageSelected={onPageSelected}
-          useNext
 
         >
           {SLIDER_DATA.map((item, index) => (

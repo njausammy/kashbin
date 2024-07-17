@@ -1,14 +1,7 @@
 import React from 'react';
-import { Box, Text, VStack, HStack, FlatList, Card, Pressable, Button } from "@gluestack-ui/themed";
+import { Box, Text, VStack, HStack, FlatList, Card, Button } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
-import { NavItem, TopNavigation } from './navigation';
 import Icon from '@expo/vector-icons/Ionicons';
-
-import PointsIcon from "../../components/Icons/points"
-import OffersIcon from "../../components/Icons/offers"
-import DealsIcon from "../../components/Icons/deals"
-import CouponsIcon from "../../components/Icons/coupons"
-
 
 
 interface ITransfer {
@@ -21,18 +14,6 @@ interface ITransfer {
 interface ITransferItemProps {
     transfer: ITransfer;
 }
-
-// Define SecondaryNavigation for PointsTransferScreen
-const SecondaryNavigation = ({ onNavigate, activeItem }: {
-    onNavigate: (path: string) => void; activeItem: string
-}) => (
-    <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem icon={<PointsIcon />}  label="Points" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<OffersIcon />} label="Offers" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<DealsIcon />}  label="Deals" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<CouponsIcon />}  label="Coupons" onPress={() => onNavigate('/points')} />
-    </HStack>
-);
 
 const PointsTransferScreen = () => {
     const handleNavigation = (route: string) => {
@@ -68,16 +49,6 @@ const PointsTransferScreen = () => {
 
     return (
         <VStack flex={1}>
-            <Box paddingTop={52} marginBottom={10} backgroundColor="#DB1E36" paddingBottom={10} paddingHorizontal={10}>
-
-                <Card paddingVertical={10} backgroundColor='#FFFFFF'>
-                    <TopNavigation activeTab="points" onNavigate={handleNavigation} />
-                </Card>
-            </Box>
-            <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
-                <SecondaryNavigation onNavigate={handleNavigation} activeItem="points" />
-            </Card>
-
             <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={15} paddingVertical={10} backgroundColor='#FFFFFF'>
                 <Box backgroundColor="#DB1E36" padding={10} borderRadius={10} alignItems="center" marginBottom={10}>
                     <Text color="white" fontSize={14}>My Points</Text>

@@ -1,28 +1,7 @@
 import React from 'react';
-import { Box, Button, Text, VStack, HStack, FlatList, Card, Input, InputField, Image } from "@gluestack-ui/themed";
+import { Box, Button, Text, VStack, FlatList, Card, Input, InputField, } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
-import {
-    NavItem, TopNavigation
-} from './navigation';
 import Icon from '@expo/vector-icons/Ionicons';
-import FontAwesomeIcon from '@expo/vector-icons/FontAwesome';
-
-import NearIcon from "../../components/Icons/near-me"
-import GiftsIcon from "../../components/Icons/gifts"
-import ServicesIcon from "../../components/Icons/people-solid"
-import ShopsIcon from "../../components/Icons/all-shops"
-
-
-export const SecondaryNavigation = ({ onNavigate, activeItem }: {
-    onNavigate: (path: string) => void; activeItem: string
-}) => (
-    <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem   icon={<NearIcon />} label="Near Me" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<GiftsIcon />}  label="Gifts" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<ServicesIcon />} label="Services" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<ShopsIcon />} label="All Shops" onPress={() => onNavigate('/points')} />
-    </HStack>
-);
 
 
 const ShopsScreen = () => {
@@ -54,18 +33,6 @@ const ShopsScreen = () => {
 
     return (
         <VStack flex={1} >
-            <Box marginBottom={10} backgroundColor="#DB1E36" paddingBottom={10} paddingHorizontal={10} >
-                <HStack marginBottom={5} paddingTop={52} space="md" >
-                    <FontAwesomeIcon name="map-marker" size={24} color="#FFFFFF" />
-                    <Text color="white" fontSize={16}>Kahawa Sukari</Text>
-                </HStack>
-                <Card paddingVertical={10} backgroundColor='#FFFFFF'>
-                    <TopNavigation activeTab="shops" onNavigate={handleNavigation} />
-                </Card>
-            </Box>
-            <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
-                <SecondaryNavigation onNavigate={handleNavigation} activeItem="near-me" />
-            </Card>
 
             <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
                 <Input
@@ -109,11 +76,6 @@ const ShopsScreen = () => {
                     <Text fontSize={12} color='#DB1E36'>All Shops</Text>
                 </Button>
             </Card>
-
-
-
-
-
         </VStack>
 
     );

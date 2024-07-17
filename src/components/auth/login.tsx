@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
-import { Box, Button, Input, InputField,  Text, VStack } from "@gluestack-ui/themed";
+import { Box, Button, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
 import PhoneNumberInput from '../form/PhoneInput';
 import { router } from 'expo-router';
 import PageHeader from '../PageHeader';
+import { authInstance } from '@/src/api/authentication';
+
+interface IForm {
+    phone: string
+    password: string
+}
 
 const Login = () => {
-    const { control, watch } = useForm({
+    const { control, watch, handleSubmit } = useForm({
         defaultValues: {
             phone: '',
             password: ''
@@ -16,9 +22,15 @@ const Login = () => {
     const [progress, setProgress] = useState(40)
 
 
-    const handleLogin = () => {
-        router.push('/onboarding/welcome')
-        setProgress(60)
+    const handleLogin = async (data: IForm) => {
+        const result = await authInstance.login({
+            username: data.phone,
+            password: data.password
+        })
+        if (result?.succes) {
+            router.push('/onboarding/welcome')
+            setProgress(60)
+        }
     }
 
 
@@ -80,7 +92,7 @@ const Login = () => {
                         alignSelf="center"
                         marginBottom={30}
                         disabled={!isFormValid}
-                        onPress={handleLogin}
+                        onPress={handleSubmit(handleLogin)}
                     >
                         <Text
                             color={isFormValid ? '$white' : '#5A5A5A'}

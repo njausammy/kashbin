@@ -1,28 +1,6 @@
 import React from 'react';
-import { Box, Text, VStack, HStack, FlatList, Card, Input, InputField, Button } from "@gluestack-ui/themed";
+import { Box, Text, VStack, FlatList, Card, Input, InputField, Button } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
-import { NavItem, TopNavigation } from './navigation';
-
-import ConnectedIcon from "../../components/Icons/connected"
-import ReferralsIcon from "../../components/Icons/referrals"
-import InvitesIcon from "../../components/Icons/invites"
-import AllContactsIcon from "../../components/Icons/contacts-solid"
-
-
-
-interface SecondaryNavigationProps {
-    onNavigate: (path: string) => void;
-    activeItem: string;
-}
-
-const SecondaryNavigation: React.FC<SecondaryNavigationProps> = ({ onNavigate, activeItem }) => (
-    <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem icon={<ConnectedIcon />} label="Connected" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<ReferralsIcon />} label="Referrals" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<InvitesIcon />} label="Invites" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<AllContactsIcon />} label="All Contacts" onPress={() => onNavigate('/points')} />
-    </HStack>
-);
 
 interface ContactItemProps {
     contact: {
@@ -55,15 +33,6 @@ const ContactsScreen: React.FC = () => {
 
     return (
         <VStack flex={1}>
-            <Box paddingTop={52} marginBottom={10} backgroundColor="#DB1E36" paddingBottom={10} paddingHorizontal={10}>
-
-                <Card paddingVertical={10} backgroundColor='#FFFFFF'>
-                    <TopNavigation activeTab="people" onNavigate={handleNavigation} />
-                </Card>
-            </Box>
-            <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
-                <SecondaryNavigation onNavigate={handleNavigation} activeItem="contacts" />
-            </Card>
 
             <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
                 <Input

@@ -6,6 +6,8 @@ import ShopIcon from "../../components/Icons/shop"
 import PointsIcon from "../../components/Icons/points"
 import PeopleIcon from "../../components/Icons/people"
 
+export type TTopNavigationTab = "shops" | 'points' | 'contacts'
+
 
 
 export const NavItem = ({ icon, label, onPress }: {
@@ -21,11 +23,11 @@ export const NavItem = ({ icon, label, onPress }: {
     </Pressable>
 );
 
-export const TopNavigation = ({ onNavigate, activeTab }: { onNavigate: (path: string) => void, activeTab: "shops" | 'points' | 'people' }) => (
+export const TopNavigation = ({ onNavigate, activeTab }: { onNavigate: (path: string) => void, activeTab:  TTopNavigationTab}) => (
     <HStack justifyContent="space-around"  >
-        <NavItem icon={<ShopIcon color={activeTab === "shops" ? "#DB1E36" : "#5A5A5A"} />} label="Shops" onPress={() => onNavigate('/main/home')} />
-        <NavItem icon={<PointsIcon color={activeTab === "points" ? "#DB1E36" : "#5A5A5A"} />} label="Points" onPress={() => onNavigate('/main/points')} />
-        <NavItem icon={<PeopleIcon color={activeTab === "people" ? "#DB1E36" : "#5A5A5A"} />} label="Contacts" onPress={() => onNavigate('/main/contacts')} />
+        <NavItem icon={<ShopIcon color={activeTab === "shops" ? "#DB1E36" : "#5A5A5A"} />} label="Shops" onPress={() => onNavigate('/main/home/shops')} />
+        <NavItem icon={<PointsIcon color={activeTab === "points" ? "#DB1E36" : "#5A5A5A"} />} label="Points" onPress={() => onNavigate('/main/home/points')} />
+        <NavItem icon={<PeopleIcon color={activeTab === "contacts" ? "#DB1E36" : "#5A5A5A"} />} label="Contacts" onPress={() => onNavigate('/main/home/contacts')} />
     </HStack>
 );
 
