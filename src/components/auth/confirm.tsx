@@ -48,7 +48,7 @@ const ConfirmSignup = () => {
                     Confirm your phone number
                 </Text>
                 <Text lineHeight={19} color='#5A5A5A' fontSize={14} fontWeight={400} marginBottom={48}>
-                    We sent a 6 digit code to +254 724 53 24 98
+                    We sent a 6 digit code to +254 700 006 003
                 </Text>
 
                 <Box>
