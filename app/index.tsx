@@ -10,7 +10,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const checkOnboarding = async () => {
       const value = await LocalStorage.getItem('hasOnboarded');
-      if (value !== null) {
+      if (value === 'onboard') {
         setHasOnboarded(true);
       }
       setIsLoading(false);
@@ -22,9 +22,9 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!isLoading) {
       if (!hasOnboarded) {
-        router.replace('/auth/signup');
+        router.replace('/onboarding');
       } else {
-        router.replace('/main');
+        router.replace('/auth/login');
       }
     }
   }, [isLoading, hasOnboarded, router]);

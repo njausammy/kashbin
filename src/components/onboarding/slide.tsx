@@ -7,6 +7,7 @@ import PagerView, { PagerViewOnPageSelectedEvent } from 'react-native-pager-view
 
 import Page from './Page';
 import Dot from './Dot';
+import LocalStorage from '@/src/utils/LocalStorage';
 
 const Image1 = require('../../../assets/images/nyl-logo.png');
 const Image2 = require('../../../assets/images/shop.png');
@@ -68,6 +69,7 @@ const OnboardingSlide = () => {
 
   const handleNext = async () => {
     if (currentPage === 2) {
+      LocalStorage.setItem('hasOnboarded', 'onboard');
       router.push('/auth/home');
     } else {
       pageRef.current?.setPage(currentPage + 1);

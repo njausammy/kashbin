@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
-import { Box, Button, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import { Box, Button, Input, InputField, Spinner, Text, VStack } from "@gluestack-ui/themed";
 import PhoneNumberInput from '../form/PhoneInput';
 import { router } from 'expo-router';
 import PageHeader from '../PageHeader';
@@ -20,9 +20,12 @@ const Login = () => {
     });
     const [isFormValid, setIsFormValid] = useState(false);
     const [progress, setProgress] = useState(40)
+    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false)
 
 
     const handleLogin = async (data: IForm) => {
+        setIsLoading(true)
         const result = await authInstance.login({
             username: data.phone,
             password: data.password
@@ -31,11 +34,17 @@ const Login = () => {
             router.push('/onboarding/welcome')
             setProgress(60)
         }
+        else {
+            setError(result?.message)
+        }
+        setIsLoading(false)
     }
 
 
     const phone = watch('phone');
     const password = watch('password');
+
+
 
     useEffect(() => {
         setIsFormValid(!!phone && !!password);
@@ -82,7 +91,11 @@ const Login = () => {
                             )}
                         />
                     </VStack>
-
+                    {error && (
+                        <Text color="red" marginTop={50} textAlign="center" >
+                            {error}
+                        </Text>
+                    )}
                     <Button
                         backgroundColor={isFormValid ? "#DB1E36" : "#B8B8B8"}
                         borderRadius={50}
@@ -94,11 +107,15 @@ const Login = () => {
                         disabled={!isFormValid}
                         onPress={handleSubmit(handleLogin)}
                     >
-                        <Text
-                            color={isFormValid ? '$white' : '#5A5A5A'}
-                        >
-                            Log in
-                        </Text>
+                        {isLoading ? (
+                            <Spinner color='$white' />
+                        ) : (
+                            <Text
+                                color={isFormValid ? '$white' : '#5A5A5A'}
+                            >
+                                Sign up
+                            </Text>
+                        )}
                     </Button>
                 </VStack>
             </VStack>

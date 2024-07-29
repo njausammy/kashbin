@@ -34,7 +34,7 @@ export const useGetEntity = (
 ) => {
     return useQuery<TEntity>(
         entityQueryKey(entity, id, query),
-        () => api.get<TEntity, TEntityQuery>(entity, id, query) as Promise<TEntity>, 
+        () => api.get<TEntity, TEntityQuery>(entity, id, query) as Promise<TEntity>,
         {
             enabled: Boolean(id),
         } as UseQueryOptions<TEntity, unknown, TEntity, QueryKey>,
@@ -144,49 +144,28 @@ export const useDeleteEntity = (
 };
 
 // Hook to create an entity
-export const useCreateEntity = (
-    entity: api.TApiEndPoints,
-    options?: Omit<
-        UseMutationOptions<
-            {
-                limit: number;
-                skip: number;
-                total: number;
-                data: TEntity[];
-            },
-            unknown,
-            Partial<TEntity> | Partial<TEntity>[],
-            QueryKey
-        >,
-        'queryKey' | 'queryFn'
-    >,
-    query?: TEntity,
-    requiresToken: boolean = true,
-) => {
+export const useCreateEntity = <TEntityRead, TEntityWrite>({
+    entity,
+    options,
+    query,
+    requiresToken,
+}: {
+    entity: api.TApiEndPoints;
+    options?: Omit<UseMutationOptions<TEntityRead, unknown, TEntityWrite, unknown>, 'mutationFn'> | undefined;
+    query?: Record<string, string>;
+    requiresToken: boolean;
+}) => {
     const queryClient = useQueryClient();
 
     const { mutate: handleCreateEntity, ...rest } = useMutation<
-        {
-            limit: number;
-            skip: number;
-            total: number;
-            data: TEntity[];
-        },
+        TEntityRead,
         unknown,
-        Partial<TEntity> | Partial<TEntity>[],
-        QueryKey
+        TEntityWrite,
+        unknown
     >(
-        async (data: Partial<TEntity> | Partial<TEntity>[]) => {
-            const createdEntity = await api.create<TEntity, Partial<TEntity>>(entity, data, query, requiresToken); // Adjust to match your API function signature
-            if (!createdEntity) {
-                throw new Error(`Failed to create entity ${entity}`);
-            }
-            return {
-                limit: 10,  // Adjust as per your response structure
-                skip: 0,
-                total: 1,
-                data: [createdEntity],
-            };
+        async (data: TEntityWrite | TEntityWrite[]) => {
+            const result = await api.create<TEntityRead, TEntityWrite>(entity, data, query, requiresToken);
+            return result as TEntityRead;
         },
         {
             onSuccess: () => {
@@ -196,8 +175,10 @@ export const useCreateEntity = (
                 console.log(`${entity} Error`, { error });
             },
             ...options,
-        },
+        }
     );
 
     return { handleCreateEntity, ...rest };
 };
+
+

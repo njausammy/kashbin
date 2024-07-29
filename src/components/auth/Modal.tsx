@@ -1,3 +1,4 @@
+import { formatPhoneNumber } from "@/src/utils/format";
 import { ModalBackdrop, ModalContent, ModalHeader, ModalBody, VStack, Text, Heading, Button, Modal, Box, ButtonIcon } from "@gluestack-ui/themed";
 import { router } from "expo-router";
 import React from "react";
@@ -7,11 +8,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Iprops {
     onClose: () => void,
-    isOpen: boolean
+    isOpen: boolean,
+    phoneNumber?: string;
 }
 
-const SignupModal = ({ onClose, isOpen }: Iprops) => {
-    
+const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
+
     const handleYes = async () => {
         onClose()
         router.push('/auth/confirm');
@@ -40,7 +42,7 @@ const SignupModal = ({ onClose, isOpen }: Iprops) => {
                         <Text alignSelf="center" lineHeight={19} color="#5A5A5A" fontSize={14} fontWeight={600}>
                             We will send a confirmation code to
                         </Text>
-                        <Text alignSelf="center" lineHeight={19} color="#5A5A5A" fontSize={14} fontWeight={600}>+254 724 53 24 98</Text>
+                        <Text alignSelf="center" lineHeight={19} color="#5A5A5A" fontSize={14} fontWeight={600}>{formatPhoneNumber(phoneNumber)}</Text>
                         <Button
                             backgroundColor="#DB1E36"
                             borderRadius={50}

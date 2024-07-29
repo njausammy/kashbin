@@ -5,6 +5,7 @@ import { Button, Input, InputField, Text, VStack, Spinner } from "@gluestack-ui/
 import PhoneNumberInput from '../form/PhoneInput';
 import SignupModal from './Modal';
 import PageHeader from '../PageHeader';
+import { IUserRead, IUserWrite } from '@/src/types/users';
 
 interface IFormValues {
     phone: string
@@ -19,11 +20,14 @@ const Signup = () => {
         }
     });
 
-    const { handleCreateEntity, isLoading } = useCreateEntity("users/signup", undefined, undefined, false)
+
+    const { handleCreateEntity, isLoading, data } = useCreateEntity<IUserRead, IUserWrite>({ entity: "users/signup", requiresToken: false })
+
 
     const [isFormValid, setIsFormValid] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [progress, setProgress] = useState(40)
+    const [error, setError] = useState<string | null>(null);
 
     const toggleModal = () => {
         setShowModal((prev) => !prev)
@@ -31,19 +35,27 @@ const Signup = () => {
 
 
     const handleSignup = async (data: IFormValues) => {
-        try {
-            await handleCreateEntity({
-                phone_number: data.phone,
-                password: data.password
-            }, {
-                onSuccess() {
-                    setProgress(60);
-                    toggleModal();
-                },
-            });
-        } catch (error) {
-            console.error("Error creating account:", error);
-        }
+
+        await handleCreateEntity({
+            phone_number: data.phone,
+            password: data.password
+        }, {
+            onSuccess() {
+                setProgress(60);
+                toggleModal();
+            },
+            onError(error: any) {
+                console.error("Signup Error:", error);
+                if (error?.detail === 'The user with this phone number already exists in the system') {
+                    setError("Phone number exists");
+                }
+                else {
+                    setError("An unexpected error occurred.");
+                }
+            }
+        });
+
+
     };
 
     const phone = watch('phone');
@@ -55,7 +67,7 @@ const Signup = () => {
 
     return (
         <>
-            <SignupModal isOpen={showModal} onClose={toggleModal} />
+            <SignupModal phoneNumber={data?.phone_number} isOpen={showModal} onClose={toggleModal} />
             <VStack backgroundColor="$white" flex={1}>
                 <PageHeader value={progress} />
                 <VStack marginTop={24} paddingHorizontal={24}>
@@ -93,7 +105,11 @@ const Signup = () => {
                             )}
                         />
                     </VStack>
-
+                    {error && (
+                        <Text color="red" marginTop={50}>
+                            {error}
+                        </Text>
+                    )}
                     <Button
                         backgroundColor={isFormValid ? "#DB1E36" : "#B8B8B8"}
                         borderRadius={50}

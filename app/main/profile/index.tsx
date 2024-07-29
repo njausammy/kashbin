@@ -1,3 +1,3 @@
-import OnboardingWelcomeScreen from "@/app/onboarding/welcome";
+import ProfileView from "@/src/components/account/profile";
 
-export default OnboardingWelcomeScreen
+export default ProfileView

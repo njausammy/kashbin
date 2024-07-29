@@ -11,9 +11,13 @@ export class Authentication {
 
     public async login({ username, password }: IAuthRequest) {
         try {
-            const response = await create<{ access_token: string }, IAuthRequest>(
+            const data = new URLSearchParams();
+            data.append('username', username);
+            data.append('password', password);
+
+            const response = await create<{ access_token: string }, string>(
                 'login/access-token',
-                { username, password },
+                data.toString(),
                 undefined,
                 false // No token required for login
             );
@@ -22,9 +26,9 @@ export class Authentication {
                 await this.storeTokens(access_token);
                 return { succes: true }
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error logging in:', error);
-            throw error; // Optionally, rethrow the error for handling upstream
+            return { succes: false, message: error.detail }
         }
     }
 

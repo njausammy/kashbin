@@ -1,14 +1,14 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 import LocalStorage from '../utils/LocalStorage';
 
-export type TApiEndPoints = 'users/signup' | 'login/access-token' ;
+export type TApiEndPoints = 'users/signup' | 'login/access-token';
 
 const API_BASE_URL = 'http://102.37.248.224/api/v1';
 
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: API_BASE_URL,
     headers: {
-        'Content-Type': 'application/json',
+        'accept': 'application/json',
     },
 });
 
@@ -28,9 +28,8 @@ const getJWT = async (): Promise<string | null> => {
     }
 };
 
-const handleError = (err: Error) => {
-    console.error('API Error:', err);
-    throw err; // Optionally, rethrow the error for centralized error handling
+const handleError = (err: AxiosError) => {
+    throw err.response?.data;
 };
 
 export const getAll = async <TEntity, TEntityQuery>(
@@ -54,7 +53,7 @@ export const getAll = async <TEntity, TEntityQuery>(
 
         return response.data;
     } catch (err) {
-        handleError(err as Error);
+        handleError(err as AxiosError);
     }
 };
 
@@ -76,7 +75,7 @@ export const get = async <TEntity, TEntityQuery>(
 
         return response.data;
     } catch (err) {
-        handleError(err as Error);
+        handleError(err as AxiosError);
     }
 };
 
@@ -97,14 +96,14 @@ export const create = async <TEntityRead, TEntityWrite>(
             headers.Authorization = `Bearer ${token}`;
         }
 
-        const response = await axiosInstance.post<TEntityRead >(`${entity}`, payload, {
+        const response = await axiosInstance.post<TEntityRead>(`${entity}`, payload, {
             params,
             headers,
         });
 
         return response.data;
     } catch (err) {
-        handleError(err as Error);
+        handleError(err as AxiosError);
     }
 };
 
@@ -126,7 +125,7 @@ export const update = async <TEntityRead, TEntityWrite>(
 
         return response.data;
     } catch (err) {
-        handleError(err as Error);
+        handleError(err as AxiosError);
     }
 };
 
@@ -141,6 +140,6 @@ export const remove = async <TEntity>(entity: TApiEndPoints, id: string) => {
 
         return response.data;
     } catch (err) {
-        handleError(err as Error);
+        handleError(err as AxiosError);
     }
 };
