@@ -50,5 +50,5 @@ To learn more about developing your project with Expo, look at the following res
 - app:assembleRelease - This command generates a standard Android Package (.apk) file, which can be used for manual installation or publishing on alternative app stores.
 
 
-[Android](https://expo.dev/artifacts/eas/iGW3Q6j9zEwZkbZL5NprYW.apk)
+[Android](https://expo.dev/artifacts/eas/oEwmzsnPfUiTVLdaJv56Bm.apk)
 [Backup](https://expo.dev/artifacts/eas/eQpwU6qmXgzdeuKCX6gjL8.apk)
