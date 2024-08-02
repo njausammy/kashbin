@@ -1,6 +1,9 @@
 import React from 'react';
-import { Box, VStack, HStack, Text, Pressable, Avatar } from "@gluestack-ui/themed";
+import { ScrollView } from 'react-native';
+import { Box, VStack, HStack, Text, Pressable, Avatar, Switch, Heading, Card } from "@gluestack-ui/themed";
 import Icon from '@expo/vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 const ProfileView = () => {
     const handleNavigation = (route: string) => {
@@ -15,51 +18,94 @@ const ProfileView = () => {
         { label: 'Support', icon: 'help-circle-outline', route: '/support' },
         { label: 'Linked Services', icon: 'link-outline', route: '/linked-services' },
         { label: 'Settings', icon: 'settings-outline', route: '/settings' },
+        { label: 'Data Privacy', icon: 'shield-outline', route: '/data-privacy' },
     ];
 
     return (
-        <VStack flex={1} backgroundColor="#F7F7F7">
-            <Box backgroundColor="#FFFFFF" padding={4} borderRadius={10} margin={4}>
-                <HStack justifyContent="space-between" alignItems="center">
-                    <HStack alignItems="center">
-                        <Avatar
-                            size="lg"
-                            // source={{ uri: 'https://example.com/path-to-avatar.jpg' }}
-                            
-                        />
-                        <VStack marginLeft={3}>
-                            <Text fontSize={13} fontWeight="bold">Mariah Wanjiku</Text>
-                            <Text color="gray.500">@m.wanjiku</Text>
-                            <Text color="gray.500">+254700000636</Text>
-                        </VStack>
-                    </HStack>
-                    <Pressable onPress={() => handleNavigation('/edit-profile')}>
+        <ScrollView>
+            <VStack flex={1} marginHorizontal={24}>
+                <HStack width="$full" height={94} justifyContent="flex-start" alignItems="flex-end">
+                    <Pressable onPress={() => router.back()} marginRight={120} >
+                        <Ionicons name="chevron-back-outline" size={24} color="#2A2A2A" />
+                    </Pressable>
+                    <Heading fontSize={18}>My Account</Heading>
+                </HStack>
+                <Card height={180} borderRadius="$lg" marginVertical={24}>
+                    <VStack alignItems="center">
+                        <Text fontSize={18} fontWeight="bold" marginTop={2}>Mariah Wanjiku</Text>
+                        <Text fontSize={14} color="gray.500">@m.wanjiku</Text>
+                        <Text fontSize={14} color="gray.500">+254700000636</Text>
+                    </VStack>
+                    <Pressable
+                        onPress={() => handleNavigation('/edit-profile')}
+                        position="absolute"
+                        top={16}
+                        right={4}
+                    >
                         <Icon name="create-outline" size={24} color="#000" />
                     </Pressable>
-                </HStack>
-            </Box>
-            <VStack margin={4}>
-                {menuItems.map((item, index) => (
-                    <Pressable key={index} onPress={() => handleNavigation(item.route)}>
-                        <HStack
-                            justifyContent="space-between"
-                            alignItems="center"
-                            paddingVertical={4}
-                            borderBottomWidth={index === menuItems.length - 1 ? 0 : 1}
-                            borderBottomColor="#E8E8E8"
-                        >
-                            <HStack alignItems="center">
-                                <Box marginRight={3}>
-                                    {/* <Icon name={item.icon} size={24} color="#1C274C" /> */}
-                                </Box>
-                                <Text fontSize={14}>{item.label}</Text>
+                </Card>
+                <Card borderRadius="$lg" height={400}>
+                    <ScrollView>
+                        <VStack>
+                            {menuItems.map((item, index) => (
+                                <Pressable key={index} onPress={() => handleNavigation(item.route)}>
+                                    <HStack
+                                        justifyContent="space-between"
+                                        alignItems="center"
+                                        paddingVertical={4}
+                                        paddingHorizontal={4} 
+                                        backgroundColor="white"
+                                        borderBottomWidth={1}
+                                        borderBottomColor="#E8E8E8"
+                                        height={62}
+                                    >
+                                        <HStack alignItems="center">
+                                            <Box marginRight={3}>
+                                                <Icon name={item.icon} size={24} color="#1C274C" />
+                                            </Box>
+                                            <Text fontSize={14}>{item.label}</Text>
+                                        </HStack>
+                                        <Icon name="chevron-forward-outline" size={24} color="#1C274C" />
+                                    </HStack>
+                                </Pressable>
+                            ))}
+                            <HStack
+                                justifyContent="space-between"
+                                alignItems="center"
+                                paddingVertical={4}
+                                paddingHorizontal={4}
+                                backgroundColor="white"
+                            >
+                                <HStack alignItems="center">
+                                    <Box marginRight={3}>
+                                        <Icon name="moon-outline" size={24} color="#1C274C" />
+                                    </Box>
+                                    <Text fontSize={14}>Dark Mode</Text>
+                                </HStack>
+                                <Switch />
                             </HStack>
-                            <Icon name="chevron-forward-outline" size={24} color="#1C274C" />
-                        </HStack>
-                    </Pressable>
-                ))}
+                            <Pressable onPress={() => handleNavigation('/logout')}>
+                                <HStack
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    paddingVertical={4}
+                                    paddingHorizontal={4}
+                                    backgroundColor="white"
+                                >
+                                    <HStack alignItems="center">
+                                        <Box marginRight={3}>
+                                            <Icon name="log-out-outline" size={24} color="red" />
+                                        </Box>
+                                        <Text fontSize={14} color="red">Logout</Text>
+                                    </HStack>
+                                </HStack>
+                            </Pressable>
+                        </VStack>
+                    </ScrollView>
+                </Card>
             </VStack>
-        </VStack>
+        </ScrollView>
     );
 };
 

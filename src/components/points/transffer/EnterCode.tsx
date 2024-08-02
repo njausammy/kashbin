@@ -1,70 +1,95 @@
-import React, { useState } from 'react';
-import { Box, VStack, Text, Button, HStack, Input, InputField, Pressable } from "@gluestack-ui/themed";
-import Icon from '@expo/vector-icons/Ionicons';
+import React, { useState, useRef, useEffect } from 'react';
+import { useForm } from "react-hook-form"
+import { Box, Button, Card, HStack, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import { router } from 'expo-router';
+import PageHeader from '../../PageHeader';
 
 const EnterCodeView = () => {
-  const [code, setCode] = useState('');
+  const { handleSubmit, control, getValues, setValue } = useForm()
+  const [code, setCode] = useState(['', '', '', '', '', '']);
+  const [progress, setProgress] = useState(80)
+  const inputRefs = useRef([]);
+
+  const handleCodeChange = (index: number, value: string) => {
+    const newCode = [...code];
+    newCode[index] = value;
+    setCode(newCode);
+
+    // Move focus to next input
+    if (value !== '' && index < 5) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
+  const isAllFilled = code.every(digit => digit !== '');
+
+  useEffect(() => {
+    if (isAllFilled) {
+      setProgress(100)
+    }
+    else {
+      setProgress(80)
+
+    }
+  }, [isAllFilled])
+
+
+  const handleCode = async () => {
+    router.push('/points/transffer/shop-details');
+  };
+
 
   return (
-    <Box flex={1} backgroundColor="$white" padding={20}>
-      <VStack space="md" alignItems="center">
-        <HStack width="100%" justifyContent="space-between" alignItems="center">
-          <Text fontSize={18} fontWeight="$medium">Enter Code</Text>
-          <Pressable onPress={() => {/* Handle close */ }}>
-            <Icon name="close" size={24} color="#000" />
-          </Pressable>
-        </HStack>
-
-        <Box
-          width={60}
-          height={60}
-          borderRadius={30}
-          backgroundColor="$green500"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Text fontSize={24} fontWeight="$bold" color="$white">K</Text>
-        </Box>
-
-        <Input
-          width="100%"
-          variant="underlined"
-          size="xl"
-        >
-          <InputField
-            placeholder="000036"
-            keyboardType="numeric"
-            textAlign="center"
-            fontSize={24}
-            value={code}
-            onChangeText={setCode}
-          />
-        </Input>
-
-        <Button
-          width="100%"
-          backgroundColor="$red500"
-          borderRadius="$full"
-          padding={12}
-        >
-          <Text color="$white" fontSize={16} fontWeight="$medium">
-            Send
+    <VStack backgroundColor="$white" flex={1}>
+      <PageHeader value={0} hideProgressBar />
+      <Card marginHorizontal={14} marginTop={94} variant="elevated" borderRadius="$xl" >
+        <VStack marginTop={24} paddingHorizontal={24} alignItems="center">
+          <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>
+            Enter Code
           </Text>
-        </Button>
+          <Box>
+            <HStack space="sm" alignItems="flex-start">
+              {code.map((digit, index) => (
+                <Input
+                  key={index}
+                  width={40}
+                  height={40}
+                  borderColor={digit?.length ? "#DB1E36" : "#B8B8B8"}
+                  borderWidth={0}
+                  borderBottomWidth={1}
 
-        <Button
-          width="100%"
-          variant="outline"
-          borderColor="$red500"
-          borderRadius="$full"
-          padding={12}
-        >
-          <Text color="$red500" fontSize={16} fontWeight="$medium">
-            Scan QR Code
-          </Text>
-        </Button>
-      </VStack>
-    </Box>
+                >
+                  <InputField
+                    ref={el => inputRefs.current[index] = el}
+                    textAlign="center"
+                    fontSize="$xl"
+                    keyboardType="number-pad"
+                    maxLength={1}
+                    value={digit}
+                    onChangeText={(value) => handleCodeChange(index, value)}
+                  />
+                </Input>
+              ))}
+            </HStack>
+          </Box>
+          <Button
+            backgroundColor="#DB1E36"
+            borderRadius={50}
+            marginTop={200}
+            height={56}
+            width="$full"
+            marginBottom={30}
+            onPress={handleCode}
+          >
+            <Text
+              color='#FFFFFF'
+            >
+              Send
+            </Text>
+          </Button>
+        </VStack>
+      </Card>
+    </VStack>
   );
 };
 

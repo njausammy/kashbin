@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, VStack, HStack, FlatList, Card, Button } from "@gluestack-ui/themed";
+import { Box, Text, VStack, HStack, FlatList, Card, Button, Pressable } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
 import Icon from '@expo/vector-icons/Ionicons';
 
@@ -50,11 +50,13 @@ const PointsTransferScreen = () => {
     return (
         <VStack flex={1}>
             <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={15} paddingVertical={10} backgroundColor='#FFFFFF'>
-                <Box backgroundColor="#DB1E36" padding={10} borderRadius={10} alignItems="center" marginBottom={10}>
-                    <Text color="white" fontSize={14}>My Points</Text>
-                    <Text color="white" fontSize={24} fontWeight="bold">{points}</Text>
-                    <Text color="white" fontSize={12}>Value: KES {value}</Text>
-                </Box>
+                <Pressable onPress={() => router.push('/points/transffer')}>
+                    <Box backgroundColor="#DB1E36" padding={10} borderRadius={10} alignItems="center" marginBottom={10}>
+                        <Text color="white" fontSize={14}>My Points</Text>
+                        <Text color="white" fontSize={24} fontWeight="bold">{points}</Text>
+                        <Text color="white" fontSize={12}>Value: KES {value}</Text>
+                    </Box>
+                </Pressable>
                 <Text fontSize={18} fontWeight="bold" marginBottom={10}>Point Transfers</Text>
                 <FlatList
                     data={transfers}
@@ -62,7 +64,7 @@ const PointsTransferScreen = () => {
                     keyExtractor={(item, index) => index.toString()}
                     contentContainerStyle={{ paddingHorizontal: 15 }}
                 />
-              
+
                 <Button
 
                     borderRadius={20}

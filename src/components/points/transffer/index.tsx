@@ -1,81 +1,113 @@
-import React, { useState } from 'react';
-import { Box, VStack, Text, Button, View } from "@gluestack-ui/themed";
+import React, { useEffect, useState } from 'react';
+import { Card, VStack, Text, Button, Pressable, HStack } from "@gluestack-ui/themed";
 import { CameraView, useCameraPermissions } from 'expo-camera';
+import { router } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import SplashScreen from '../../SplashScreen';
 
 const ScanCodeView = () => {
-    const [hasPermission, setHasPermission] = useState(null);
-    const [scanned, setScanned] = useState(false);
+    const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+    const [scannedCode, setScannedCode] = useState<string | null>(null);
     const [permission, requestPermission] = useCameraPermissions();
 
-    if (!permission) {
-        // Camera permissions are still loading.
-        return <View />;
+    useEffect(() => {
+        (async () => {
+            if (permission) {
+                const { granted } = await requestPermission();
+                setHasPermission(granted);
+            }
+        })();
+    }, [permission]);
+
+    if (hasPermission === null) {
+        // Camera permissions are still loading
+        return <SplashScreen />;
     }
 
-    if (!permission.granted) {
-        // Camera permissions are not granted yet.
-        return (
-            <View>
-                <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-                <Button onPress={requestPermission}>Grant Permission</Button>
-            </View>
-        );
-    }
+    const handleRequestPermission = async () => {
+        const { granted } = await requestPermission();
+        setHasPermission(granted);
+    };
 
+    const handleBarcodeScanned = (e: { data: string }) => {
+        // Ensure the scanned code is a 5-digit number
+        if (!scannedCode) {
+            setScannedCode(e.data);
+            router.push('/points/transffer/shop-details');
+        }
+    };
 
     return (
-        <Box flex={1} backgroundColor="$white" padding={20}>
-            <VStack space="md" alignItems="center">
-                <Box
-                    borderWidth={1}
-                    borderColor="$lightBlue300"
-                    borderRadius="$lg"
-                    padding={20}
-                    width="100%"
-                    alignItems="center"
-                >
-                    <Text fontSize={18} fontWeight="$medium" textAlign="center" marginBottom={10}>
-                        Scan or Enter Code to Redeem or Request Points
-                    </Text>
-                    <Text fontSize={14} color="$blueGray400" textAlign="center" marginBottom={20}>
-                        Hold the code inside the frame, it will be scanned automatically
-                    </Text>
-                    <CameraView
-                        barcodeScannerSettings={{
-                            barcodeTypes: ["qr"],
-                        }}
-                        onBarcodeScanned={(e) => {
-                            console.log(e)
-                        }}
-                    />
-                </Box>
+        <VStack space="md" alignItems="center" height="$full">
+            <HStack width="$full" height={94} alignItems="flex-end">
+                <Pressable onPress={() => router.back()} marginRight={120}>
+                    <Ionicons name="chevron-back-outline" size={24} color="#2A2A2A" />
+                </Pressable>
+            </HStack>
 
-                <Button
-                    width="100%"
-                    backgroundColor="$red500"
-                    borderRadius="$full"
-                    padding={12}
-                    onPress={() => { }}
-                >
-                    <Text color="$white" fontSize={16} fontWeight="$medium">
-                        Scan QR Code
-                    </Text>
-                </Button>
+            <Card width={361} height={438} padding={14} borderRadius="$xl">
+                {hasPermission ? (
+                    <VStack space="md" alignItems="center" height="$full">
+                        <Text fontSize={18} fontWeight="$medium" textAlign="center" marginBottom={10}>
+                            Scan or Enter Code to Redeem or Request Points
+                        </Text>
+                        <Text fontSize={14} color="$blueGray400" textAlign="center" marginBottom={20}>
+                            Hold the code inside the frame, it will be scanned automatically
+                        </Text>
+                        <CameraView
+                            style={{ flex: 1, width: '100%' }} // Ensure CameraView takes up available space
+                            barcodeScannerSettings={{
+                                barcodeTypes: ["qr"],
+                            }}
+                            onBarcodeScanned={handleBarcodeScanned}
+                        />
+                    </VStack>
+                ) : (
+                    <VStack space="md" alignItems="center" justifyContent="center" height="$full">
+                        <Text fontSize={16} color="$red500" textAlign="center" marginBottom={20}>
+                            No camera permission granted.
+                        </Text>
+                        <Button
+                            backgroundColor="#DB1E36"
+                            borderRadius={50}
+                            paddingHorizontal={10}
+                            height={56}
+                            width={307}
+                            alignSelf="center"
+                            onPress={handleRequestPermission}
+                        >
+                            <Text color='white'>Request Permission</Text>
+                        </Button>
+                    </VStack>
+                )}
+            </Card>
 
-                <Button
-                    width="100%"
-                    variant="outline"
-                    borderColor="$red500"
-                    borderRadius="$full"
-                    padding={12}
-                    onPress={() => setScanned(false)} // Reset scanned state for testing
-                >
-                    <Text color="$red500" fontSize={16} fontWeight="$medium">
-                        Enter Code
-                    </Text>
-                </Button>
-            </VStack>
-        </Box>
+            <Button
+                backgroundColor="#DB1E36"
+                borderRadius={50}
+                paddingHorizontal={10}
+                height={56}
+                width={307}
+                alignSelf="center"
+                onPress={() => setScannedCode(null)}
+            >
+                <Text color='white'>Scan QR Code</Text>
+            </Button>
+            <Button
+                borderColor='#DB1E36'
+                borderWidth={1}
+                backgroundColor="$white"
+                borderRadius={50}
+                paddingHorizontal={10}
+                marginTop={16}
+                height={56}
+                width={307}
+                alignSelf="center"
+                onPress={() => { router.push('/points/transffer/enter-code') }}
+            >
+                <Text color='#DB1E36'>Enter Code</Text>
+            </Button>
+        </VStack>
     );
 };
 

@@ -40,7 +40,8 @@
       },
       "eas": {
         "projectId": "28b207ba-7180-45f4-9586-a60cd4b350ca"
-      }
+      },
+      "DEVELOPER_MODE": true
     },
     "owner": "nyakaru"
   }

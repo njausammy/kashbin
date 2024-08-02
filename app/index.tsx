@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Constants from 'expo-constants';
 import { router } from 'expo-router';
 import SplashScreen from "@/src/components/SplashScreen";
 import LocalStorage from "@/src/utils/LocalStorage";
+
+const isDeveloperMode = Constants.expoConfig?.extra?.DEVELOPER_MODE;
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,6 +12,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const checkOnboarding = async () => {
+      if (isDeveloperMode) {
+        await LocalStorage.removeItem('hasOnboarded');
+      }
       const value = await LocalStorage.getItem('hasOnboarded');
       if (value === 'onboard') {
         setHasOnboarded(true);
@@ -22,7 +28,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!isLoading) {
       if (!hasOnboarded) {
-        router.replace('/onboarding');
+        router.replace('/account/account-details');
       } else {
         router.replace('/auth/login');
       }

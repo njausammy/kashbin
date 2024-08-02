@@ -4,6 +4,7 @@ import { Box, Button, Input, InputField, Progress, ProgressFilledTrack, Text, VS
 import { router } from 'expo-router';
 import { Image, } from 'react-native';
 import PageHeader from '../PageHeader';
+import DateInput from '../form/DateInput';
 
 const AccountView = () => {
     const { control, handleSubmit, watch } = useForm({
@@ -11,7 +12,7 @@ const AccountView = () => {
             firstName: '',
             lastName: '',
             username: '',
-            dateOfBirth: ''
+            dateOfBirth: new Date(1598051730000)
         }
     });
 
@@ -35,7 +36,7 @@ const AccountView = () => {
 
     return (
         <VStack backgroundColor="$white" flex={1}>
-    
+
             <PageHeader value={50} />
 
             <VStack marginTop={24} paddingHorizontal={24}>
@@ -108,7 +109,7 @@ const AccountView = () => {
                                 borderRadius={8}
                                 height={48}
                                 width="$full"
-                                // leftElement={<Text>@</Text>}
+                            // leftElement={<Text>@</Text>}
                             >
                                 <InputField
                                     onChangeText={onChange}
@@ -127,20 +128,7 @@ const AccountView = () => {
                         name="dateOfBirth"
                         control={control}
                         render={({ field: { onChange, value } }) => (
-                            <Input
-                            
-                                borderColor="#B8B8B8"
-                                borderWidth={1}
-                                borderRadius={8}
-                                height={48}
-                                width="$full"
-                            >
-                                <InputField
-                                    placeholder="DD/MM/YYYY"
-                                    onChangeText={onChange}
-                                    value={value}
-                                />
-                            </Input>
+                            <DateInput value={value} />
                         )}
                     />
                 </VStack>
