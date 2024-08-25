@@ -6,11 +6,10 @@ type PageProps = {
   title: string
   WelcomeImage: any
   imageHeight: number
+  imageWidth:number
 }
 
-const { width, height } = Dimensions.get('screen')
 
-const headerSectionHeight = (120 / 884) * height
 const deviceHeight = Dimensions.get('screen').height;
 
 export const getHeight = (height: number) => {
@@ -22,18 +21,21 @@ const Page = ({
   title,
   WelcomeImage,
   imageHeight,
-  
+  imageWidth
 }: PageProps) => {
   return (
     <VStack>
 
       <Box
+      height={250}
+      alignItems="center"
+      justifyContent="center"
       >
         <Image
           source={WelcomeImage}
           alt="Welcome Image"
-          width={305}
-          height={263}
+          width={imageWidth}
+          height={imageHeight}
           marginTop={imageKey == 2 ? getHeight(4) : 0}
           alignSelf='center'
 

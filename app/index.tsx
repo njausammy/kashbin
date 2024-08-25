@@ -28,7 +28,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!isLoading) {
       if (!hasOnboarded) {
-        router.replace('/account/account-details');
+        router.replace('/points/transffer/redeem');
       } else {
         router.replace('/auth/login');
       }

@@ -10,7 +10,7 @@ import Dot from './Dot';
 import LocalStorage from '@/src/utils/LocalStorage';
 
 const Image1 = require('../../../assets/images/nyl-logo.png');
-const Image2 = require('../../../assets/images/shop.png');
+const Image2 = require('../../../assets/images/pay-hand.png');
 const Image3 = require('../../../assets/images/friends.png');
 
 export interface PageInterface {
@@ -18,6 +18,8 @@ export interface PageInterface {
   WelcomeImg: any;
   top: number;
   indicatorTop: string
+  imageHeight: number
+  imageWidth: number
 }
 
 export interface PageControlRef {
@@ -31,25 +33,28 @@ export const SLIDER_DATA: PageInterface[] = [
     title: 'Karibu, pata points unaponunua bidhaa kwa duka!  ',
     WelcomeImg: Image1,
     top: 142,
-    indicatorTop: '43%'
+    indicatorTop: '43%',
+    imageHeight: 263,
+    imageWidth: 305
   },
   {
     title: 'Tumia points kununua bidhaa kwa duka!',
     WelcomeImg: Image2,
     top: 142,
-    indicatorTop: '43%'
+    indicatorTop: '43%',
+    imageHeight: 136,
+    imageWidth: 136
   },
   {
     title: 'Sambaza points na marafiki!',
     WelcomeImg: Image3,
     top: 142,
-    indicatorTop: '43%'
+    indicatorTop: '43%',
+    imageHeight: 253,
+    imageWidth: 275
   },
 ];
 
-const { width, height } = Dimensions.get('screen');
-const swiperHeight = (570 / 884) * height;
-const topMargin = (50 / 884) * height;
 
 export const getHeight = (height: number) => {
   return (height / 884) * deviceHeight;
@@ -93,7 +98,8 @@ const OnboardingSlide = () => {
               imageKey={index}
               title={item.title}
               WelcomeImage={item.WelcomeImg}
-              imageHeight={swiperHeight}
+              imageHeight={item.imageHeight}
+              imageWidth={item.imageWidth}
             />
           ))}
         </PagerView>

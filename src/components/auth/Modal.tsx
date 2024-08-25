@@ -2,8 +2,9 @@ import { formatPhoneNumber } from "@/src/utils/format";
 import { ModalBackdrop, ModalContent, ModalHeader, ModalBody, VStack, Text, Heading, Button, Modal, Box, ButtonIcon } from "@gluestack-ui/themed";
 import { router } from "expo-router";
 import React from "react";
-import { Image, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Loader from "../Loader";
+import VerifyIcon from '../Icons/create-account/verify'
 
 
 interface Iprops {
@@ -35,10 +36,10 @@ const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
                 </ModalHeader>
                 <ModalBody>
                     <VStack space="md" alignItems="center">
-                        <Box alignSelf="center" marginBottom={24}>
-                            <Image source={require('../../../assets/images/elipsis.png')} />
+                        <Box alignSelf="center" >
+                            <Loader disableAnimation iconComp={<VerifyIcon />} />
                         </Box>
-                        <Heading alignSelf="center" lineHeight={28} color="#2A2A2A" fontSize={22} fontWeight={600}>Verify your phone number.</Heading>
+                        <Heading alignSelf="center" lineHeight={28} color="#2A2A2A" fontSize={22} fontWeight={600} marginBottom={38} >Verify your phone number.</Heading>
                         <Text alignSelf="center" lineHeight={19} color="#5A5A5A" fontSize={14} fontWeight={600}>
                             We will send a confirmation code to
                         </Text>
@@ -46,7 +47,6 @@ const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
                         <Button
                             backgroundColor="#DB1E36"
                             borderRadius={50}
-                            marginTop={24}
                             height={56}
                             width="$full"
                             alignSelf="center"

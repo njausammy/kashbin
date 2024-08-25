@@ -10,8 +10,7 @@ import {
     Text,
     VStack,
 } from '@gluestack-ui/themed';
-import { Image, } from 'react-native';
-import PageHeader from '../PageHeader';
+import PageHeader from '../../PageHeader';
 import { router } from 'expo-router';
 
 const LocationDetails = () => {
