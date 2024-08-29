@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, VStack, Text, Button, HStack, Input, InputField, Card } from "@gluestack-ui/themed";
+import { VStack, Text, Button, Input, InputField, Card, Alert, AlertIcon, AlertText } from "@gluestack-ui/themed";
+import Icon from '@expo/vector-icons/AntDesign';
 import PageHeader from '../../PageHeader';
 import { useLocalSearchParams } from 'expo-router';
 
@@ -15,21 +16,23 @@ const RedeemPointsView = () => {
     return (
         <VStack backgroundColor="$white" flex={1} paddingHorizontal={24}>
             <PageHeader value={0} hideProgressBar />
-            <Text fontSize={22} fontWeight={600} color='#2A2A2A' >Redeem Points</Text>
-            <Text fontSize={14} color="#5A5A5A" fontWeight={400} >Enter the number of points to redeem</Text>
+            <Text fontSize={22} fontWeight={600} color='#2A2A2A'>Redeem Points</Text>
+            <Text fontSize={14} color="#5A5A5A" fontWeight={400}>Enter the number of points to redeem</Text>
 
-            <HStack space="md" justifyContent="space-between" marginVertical={60}>
-                <Card backgroundColor="#DB1E36" padding={10} borderRadius={10} flex={1}>
-                    <Text color="$white" fontSize={20} fontWeight="$bold">3850</Text>
-                    <Text color="$white" fontSize={12}>Total Points</Text>
-                    <Text color="$white" fontSize={12}>Value: KES 3850</Text>
-                </Card>
-                <Card backgroundColor="#81C784" padding={10} borderRadius={10} flex={1}>
-                    <Text color="$white" fontSize={20} fontWeight="$bold">350</Text>
-                    <Text color="$white" fontSize={12}>This outlet</Text>
-                    <Text color="$white" fontSize={12}>Value: KES 350</Text>
-                </Card>
-            </HStack>
+            <VStack space="md" marginVertical={20}>
+                <Alert height={56} borderRadius={12} variant="solid" backgroundColor='#E8F5E9'>
+                    <Icon name="checkcircle" size={20} color="#1B5E21" />
+                    <AlertText marginLeft={10}>
+                        <Text fontWeight={400}>Points Balance: 3850 Value: KES 3850</Text>
+                    </AlertText>
+                </Alert>
+                <Alert height={56} borderRadius={12} variant="solid" backgroundColor='#EAEBFF'>
+                    <Icon name="checkcircle" size={20} color="#1E3AE5"  />
+                    <AlertText marginLeft={10} >
+                        <Text fontWeight={400}>Points from this shop: 350</Text>
+                    </AlertText>
+                </Alert>
+            </VStack>
 
             <Card backgroundColor="$white" padding={20} borderRadius={10} height={295}>
                 <VStack space="md">
@@ -39,9 +42,7 @@ const RedeemPointsView = () => {
                     <Text fontSize={12} color="#5A5A5A" textAlign="center">
                         {shopDetails.address}
                     </Text>
-                    <Input
-                        variant="underlined"
-                    >
+                    <Input variant="underlined">
                         <InputField
                             textAlign="center"
                             fontSize={36}
@@ -61,16 +62,13 @@ const RedeemPointsView = () => {
                         width="$full"
                         marginBottom={30}
                     >
-                        <Text
-                            color='#FFFFFF'
-                        >
+                        <Text color='#FFFFFF'>
                             Redeem
                         </Text>
                     </Button>
                 </VStack>
             </Card>
         </VStack>
-
     );
 };
 

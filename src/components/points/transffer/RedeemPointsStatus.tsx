@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, VStack, Text, Button, HStack, Input, InputField, Card } from "@gluestack-ui/themed";
+import { Box, VStack, Text, Button, HStack, Input, InputField, Card, Alert, AlertText } from "@gluestack-ui/themed";
+import Icon from '@expo/vector-icons/AntDesign';
 import PageHeader from '../../PageHeader';
 import { useLocalSearchParams } from 'expo-router';
 import FailIcon from '../../Icons/fail-icon';
@@ -68,18 +69,21 @@ const RedeemPointsView = () => {
             <Text fontSize={22} fontWeight={600} color='#2A2A2A' >Redeem Points</Text>
             <Text fontSize={14} color="#5A5A5A" fontWeight={400} >Enter the number of points to redeem</Text>
 
-            <HStack space="md" justifyContent="space-between" marginVertical={60}>
-                <Card backgroundColor="#DB1E36" padding={10} borderRadius={10} flex={1}>
-                    <Text color="$white" fontSize={20} fontWeight="$bold">{totalPoints}</Text>
-                    <Text color="$white" fontSize={12}>Total Points</Text>
-                    <Text color="$white" fontSize={12}>Value: KES {totalPoints}</Text>
-                </Card>
-                <Card backgroundColor="#81C784" padding={10} borderRadius={10} flex={1}>
-                    <Text color="$white" fontSize={20} fontWeight="$bold">{outletPoints}</Text>
-                    <Text color="$white" fontSize={12}>This outlet</Text>
-                    <Text color="$white" fontSize={12}>Value: KES {outletPoints}</Text>
-                </Card>
-            </HStack>
+
+            <VStack space="md" marginVertical={20}>
+                <Alert height={56} borderRadius={12} variant="solid" backgroundColor='#E8F5E9'>
+                    <Icon name="checkcircle" size={20} color="#1B5E21" />
+                    <AlertText marginLeft={10}>
+                        <Text fontWeight={400}>Points Balance: 3850 Value: KES 3850</Text>
+                    </AlertText>
+                </Alert>
+                <Alert height={56} borderRadius={12} variant="solid" backgroundColor='#EAEBFF'>
+                    <Icon name="checkcircle" size={20} color="#1E3AE5"  />
+                    <AlertText marginLeft={10} >
+                        <Text fontWeight={400}>Points from this shop: 350</Text>
+                    </AlertText>
+                </Alert>
+            </VStack>
 
             {redeemState === 'input' ? (
                 <Card backgroundColor="$white" padding={20} borderRadius={10} height={295}>
