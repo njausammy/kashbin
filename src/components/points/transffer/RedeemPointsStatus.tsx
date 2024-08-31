@@ -39,24 +39,24 @@ const RedeemPointsView = () => {
                 {redeemState === 'processing' && (
                     <>
                         <Loader />
-                        <Text textAlign="center" marginTop={30} fontSize={22} fontWeight={600} lineHeight={28} color='#2A2A2A'>Processing redemption...</Text>
+                        <Text textAlign="center" marginTop={30} fontSize={22} fontWeight={600} lineHeight={28} color='#2A2A2A'>Processing...</Text>
                     </>
                 )}
                 {redeemState === 'success' && (
                     <>
                         <Loader customComponent={<SuccessIcon />} />
-                        <Text textAlign="center" marginTop={30} fontSize={22} fontWeight={600} lineHeight={28} color='#2A2A2A'>Redemption Successful!</Text>
+                        <Text textAlign="center" marginTop={30} fontSize={22} fontWeight={600} lineHeight={28} color='#2A2A2A'>Success!</Text>
                         <Text textAlign="center" marginTop={8} fontSize={14} color='#5A5A5A'>
-                            You have successfully redeemed {pointsToRedeem} points. Your new balance is {totalPoints} points.
+                            X1632383K2 Confirmed. You have successfully redeemed {pointsToRedeem} points from Niyaleo Wholesale Depot on 5/8/2024 at 13:20:22. Transaction points, 10. Your new points balance is 3340.
                         </Text>
                     </>
                 )}
                 {redeemState === 'failed' && (
                     <>
                         <Loader customComponent={<FailIcon />} />
-                        <Text textAlign="center" marginTop={30} fontSize={22} fontWeight={600} lineHeight={28} color='#2A2A2A'>Redemption Failed!</Text>
+                        <Text textAlign="center" marginTop={30} fontSize={22} fontWeight={600} lineHeight={28} color='#2A2A2A'>Failed!</Text>
                         <Text textAlign="center" marginTop={8} fontSize={14} color='#5A5A5A'>
-                            Insufficient balance to redeem {pointsToRedeem} points. Your current balance is {totalPoints} points.
+                            You have insufficient balance to redeem {totalPoints}  points. Your points balance is 130.  
                         </Text>
                     </>
                 )}
@@ -67,7 +67,7 @@ const RedeemPointsView = () => {
     return (
         <VStack backgroundColor="$white" flex={1} paddingHorizontal={24}>
             <PageHeader value={0} hideProgressBar />
-            <Text  marginTop={50} fontSize={22} fontWeight={600} color='#2A2A2A' >Redeem Points</Text>
+            <Text marginTop={50} fontSize={22} fontWeight={600} color='#2A2A2A' >Redeem Points</Text>
             <Text fontSize={14} color="#5A5A5A" fontWeight={400} >Enter the number of points to redeem</Text>
 
 
@@ -79,7 +79,7 @@ const RedeemPointsView = () => {
                     </AlertText>
                 </Alert>
                 <Alert height={56} borderRadius={12} variant="solid" backgroundColor='#EAEBFF'>
-                    <Icon name="checkcircle" size={20} color="#1E3AE5"  />
+                    <Icon name="checkcircle" size={20} color="#1E3AE5" />
                     <AlertText marginLeft={10} >
                         <Text fontWeight={400}>Points from this shop: 350</Text>
                     </AlertText>
