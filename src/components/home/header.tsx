@@ -16,6 +16,7 @@ import ConnectedIcon from "../../components/Icons/connected";
 import ReferralsIcon from "../../components/Icons/referrals";
 import InvitesIcon from "../../components/Icons/invites";
 import AllContactsIcon from "../../components/Icons/contacts-solid";
+import useActiveRoute from "@/src/hooks/useActiveRoute";
 
 interface SecondaryNavigationProps {
     onNavigate: (path: string) => void;
@@ -23,53 +24,61 @@ interface SecondaryNavigationProps {
 }
 
 // Secondary navigation for shops screen
-const ShopsSecondaryNavigation: React.FC<SecondaryNavigationProps> = ({ onNavigate, activeItem }) => (
-    <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem icon={<NearIcon />} label="Near Me" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<GiftsIcon />} label="Gifts" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<ServicesIcon />} label="Services" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<ShopsIcon />} label="All Shops" onPress={() => onNavigate('/points')} />
-    </HStack>
-);
+export const ShopsSecondaryNavigation = () => {
+    return (
+        <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
+
+            <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
+                <NavItem color="#43A048" icon={<NearIcon />} label="Near Me" onPress={() => router.push('/points')} />
+                <NavItem icon={<GiftsIcon />} label="Gifts" onPress={() => router.push('/points')} />
+                <NavItem icon={<ServicesIcon />} label="Services" onPress={() => router.push('/points')} />
+                <NavItem icon={<ShopsIcon />} label="All Shops" onPress={() => router.push('/points')} />
+            </HStack>
+        </Card>
+    )
+};
 
 // Secondary navigation for points screen
-const PointsSecondaryNavigation: React.FC<SecondaryNavigationProps> = ({ onNavigate, activeItem }) => (
-    <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem icon={<PointsIcon />} label="Points" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<OffersIcon />} label="Offers" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<DealsIcon />} label="Deals" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<CouponsIcon />} label="Coupons" onPress={() => onNavigate('/points')} />
-    </HStack>
-);
+export const PointsSecondaryNavigation = () => {
+    const activeTab = useActiveRoute();
+    const activeColor = "#1E3AE5";
+    const inactiveColor = "#414141";
+
+    const getColor = (tabName: string) => (activeTab === tabName ? activeColor : inactiveColor);
+    const getFontWeight = (tabName: string) => (activeTab === tabName ? 700 : 400);
+
+    return (<Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
+        <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
+            <NavItem fontWeight={getFontWeight('transfers')} color={getColor("transfers")} icon={<PointsIcon />} label="Points" onPress={() => router.push('/main/home/points')} />
+            <NavItem fontWeight={getFontWeight('offers')} color={getColor("offers")}  icon={<OffersIcon />} label="Offers" onPress={() => router.push('/main/home/points/offers')} />
+            <NavItem fontWeight={getFontWeight('deals')} color={getColor("deals")}  icon={<DealsIcon />} label="Deals" onPress={() => router.push('/main/home/points/deals')} />
+            <NavItem fontWeight={getFontWeight('coupons')} color={getColor("coupons")}  icon={<CouponsIcon />} label="Coupons" onPress={() => router.push('/main/home/points/coupons')} />
+        </HStack>
+    </Card>
+    );
+}
 
 // Secondary navigation for contacts screen
-const ContactsSecondaryNavigation: React.FC<SecondaryNavigationProps> = ({ onNavigate, activeItem }) => (
-    <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-        <NavItem icon={<ConnectedIcon />} label="Connected" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<ReferralsIcon />} label="Referrals" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<InvitesIcon />} label="Invites" onPress={() => onNavigate('/points')} />
-        <NavItem icon={<AllContactsIcon />} label="All Contacts" onPress={() => onNavigate('/points')} />
-    </HStack>
+export const ContactsSecondaryNavigation = () => (
+    <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
+
+        <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
+            <NavItem icon={<ConnectedIcon />} label="Connected" onPress={() => router.push('/points')} />
+            <NavItem icon={<ReferralsIcon />} label="Referrals" onPress={() => router.push('/points')} />
+            <NavItem icon={<InvitesIcon />} label="Invites" onPress={() => router.push('/points')} />
+            <NavItem icon={<AllContactsIcon />} label="All Contacts" onPress={() => router.push('/points')} />
+        </HStack>
+    </Card>
 );
 
 const HomeHeader = () => {
 
-    const path = usePathname(); // Get the current pathname using usePathname hook
-    const [activeRoute, setActiveRoute] = useState<TTopNavigationTab>("shops"); // State to hold the last path name
 
-    useEffect(() => {
-        // Split the pathname into an array of path names
-        const names = path.split('/').filter(name => name !== ''); // Remove empty segments
-
-        // Set the last path name from the array
-        if (names.length > 0) {
-            setActiveRoute(names[names.length - 1] as TTopNavigationTab); // Get the last element in the array
-        }
-    }, [path]);
 
     const handleNavigation = (route: string) => {
         router.push(route);
     };
+
 
     return (
         <Box>
@@ -79,21 +88,10 @@ const HomeHeader = () => {
                     <Text color="white" fontSize={16}>Kahawa Sukari</Text>
                 </HStack>
                 <Card paddingVertical={10} backgroundColor='#FFFFFF'>
-                    <TopNavigation activeTab={activeRoute} onNavigate={handleNavigation} />
+                    <TopNavigation onNavigate={handleNavigation} />
                 </Card>
             </Box>
-            <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
-                {/* Render appropriate secondary navigation based on the active route */}
-                {activeRoute === 'shops' && (
-                    <ShopsSecondaryNavigation onNavigate={handleNavigation} activeItem={activeRoute} />
-                )}
-                {activeRoute === 'points' && (
-                    <PointsSecondaryNavigation onNavigate={handleNavigation} activeItem={activeRoute} />
-                )}
-                {activeRoute === 'contacts' && (
-                    <ContactsSecondaryNavigation onNavigate={handleNavigation} activeItem={activeRoute} />
-                )}
-            </Card>
+
         </Box>
     );
 };

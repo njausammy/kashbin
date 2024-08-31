@@ -4,9 +4,6 @@ import HomeHeader from '@/src/components/home/header';
 
 export default function HomeLayout() {
 
-
-
-
     return (
         <>
             <HomeHeader />

@@ -1,35 +1,63 @@
 import React, { ReactNode } from 'react';
 import { HStack, Image } from "@gluestack-ui/themed";
 import { Pressable, VStack, Text } from "@gluestack-ui/themed";
+import useActiveRoute from "@/src/hooks/useActiveRoute"
 
 import ShopIcon from "../../components/Icons/shop"
-import PointsIcon from "../../components/Icons/points"
+import PointsIcon from "../../components/Icons/coins"
 import PeopleIcon from "../../components/Icons/people"
 
 export type TTopNavigationTab = "shops" | 'points' | 'contacts'
 
 
 
-export const NavItem = ({ icon, label, onPress }: {
+export const NavItem = ({ icon, label, onPress, color, fontWeight = 400 }: {
     icon: ReactNode;
     label: string;
-    onPress: () => void
+    onPress: () => void;
+    color?: string;
+    fontWeight?: number
 }) => (
     <Pressable onPress={onPress}>
         <VStack alignItems="center">
             {icon}
-            <Text fontSize={12}>{label}</Text>
+            <Text fontWeight={fontWeight} color={color} fontSize={12}>{label}</Text>
         </VStack>
     </Pressable>
 );
 
-export const TopNavigation = ({ onNavigate, activeTab }: { onNavigate: (path: string) => void, activeTab:  TTopNavigationTab}) => (
-    <HStack justifyContent="space-around"  >
-        <NavItem icon={<ShopIcon color={activeTab === "shops" ? "#DB1E36" : "#5A5A5A"} />} label="Shops" onPress={() => onNavigate('/main/home/shops')} />
-        <NavItem icon={<PointsIcon color={activeTab === "points" ? "#DB1E36" : "#5A5A5A"} />} label="Points" onPress={() => onNavigate('/main/home/points')} />
-        <NavItem icon={<PeopleIcon color={activeTab === "contacts" ? "#DB1E36" : "#5A5A5A"} />} label="Contacts" onPress={() => onNavigate('/main/home/contacts')} />
-    </HStack>
-);
+export const TopNavigation = ({ onNavigate }: { onNavigate: (path: string) => void }) => {
+    const activeTab = useActiveRoute();
+    const activeColor = "#DB1E36";
+    const inactiveColor = "#5A5A5A";
+    console.log(activeTab)
+
+    const getColor = (tabNames: string[]) => (tabNames.includes(activeTab) ? activeColor : inactiveColor);
+
+    return (
+        <HStack justifyContent="space-around">
+            <NavItem
+                color={getColor(["shops"])}
+                icon={<ShopIcon color={getColor(["shops"])} />}
+                label="Shops"
+                onPress={() => onNavigate('/main/home/shops')}
+            />
+            <NavItem
+                color={getColor(["transfers"])}
+                icon={<PointsIcon color={getColor(["transfers", 'offers','deals' , 'coupons'])} />}
+                label="Points"
+                onPress={() => onNavigate('/main/home/points')}
+            />
+            <NavItem
+                color={getColor(["contacts"])}
+                icon={<PeopleIcon color={getColor(["contacts"])} />}
+                label="Contacts"
+                onPress={() => onNavigate('/main/home/contacts')}
+            />
+        </HStack>
+    );
+};
+
 
 
 export const SecondaryNavItem = ({ icon, label, onPress, isActive }: {

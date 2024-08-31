@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, VStack, Text, Button, Card } from "@gluestack-ui/themed";
+import { VStack, Text, Card } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import PageHeader from '../../PageHeader';
 import { router, useLocalSearchParams } from 'expo-router';
 
@@ -13,6 +14,14 @@ const ShopDetailsView = () => {
     const handleRedeem = () => {
         router.push({
             pathname: '/points/transffer/redeem',
+            params: { shop: shop },
+        });
+    };
+
+
+    const handleRequest = () => {
+        router.push({
+            pathname: '/points/request',
             params: { shop: shop },
         });
     };
@@ -51,7 +60,7 @@ const ShopDetailsView = () => {
                 height={56}
                 width={307}
                 alignSelf="center"
-                onPress={handleRedeem}
+                onPress={handleRequest}
             >
                 <Text color='#DB1E36'>Request Points</Text>
             </Button>

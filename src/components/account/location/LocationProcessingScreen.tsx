@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Text, VStack, Card, Pressable, HStack } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
-import PageHeader from '../../PageHeader';
 import Loader from '../../Loader';
 import SuccessIcon from '../../Icons/success-icon';
 import FailIcon from '../../Icons/fail-icon';
@@ -10,19 +9,33 @@ const LocationStatusScreen = () => {
     const [locationState, setLocationState] = useState('processing');
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            // setLocationState('success');
-        }, 3000);
+        if (locationState === 'processing') {
+            const timer = setTimeout(() => {
+                setLocationState('failed'); // Simulate failure after a few minutes
+            }, 3000); // Adjust time as needed
 
-        return () => clearTimeout(timer);
-    }, []);
+            return () => clearTimeout(timer);
+        }
+    }, [locationState]);
+
+    const handleRetry = () => {
+        setLocationState('processing');
+        // Simulate processing and then success
+        const timer = setTimeout(() => {
+            setLocationState('success');
+        }, 3000); // Adjust time as needed
+    };
 
     const handleContinue = () => {
         router.push('/next-screen');
     };
 
+    const handleEnterAddress= () => {
+        router.push('/location/manual-location');
+    };
+
     const handleSkip = () => {
-        router.push('/next-screen');
+        router.push('/auth/set-pin');
     };
 
     return (
@@ -38,12 +51,11 @@ const LocationStatusScreen = () => {
                                 locationState === 'success' ? "Congratulations! Your address is ready for use." :
                                     "Location not found. Retry"}
                         </Text >
-                        {locationState === "failed" && <Pressable><Text color='#DB1E36' fontSize={14}> Locate Me</Text></Pressable>
-                        }
+                        {locationState === "failed" && <Pressable onPress={handleRetry}><Text color='#DB1E36' fontSize={14}> Locate Me</Text></Pressable>}
                     </HStack>
                 </VStack>
 
-                <VStack flex={1} justifyContent="space-around" alignItems="center" >
+                <VStack flex={1} justifyContent="space-around" alignItems="center">
                     <Card size="lg" variant="outline" padding={24} alignItems="center" width="100%">
                         {locationState === 'processing' && (
                             <>
@@ -78,15 +90,14 @@ const LocationStatusScreen = () => {
                             height={56}
                             width="100%"
                             marginBottom={16}
+                            onPress={handleEnterAddress}
                         >
                             <Text color='white'>Enter Address Manually</Text>
                         </Button>
                     )}
                 </VStack>
 
-
-
-                <Text color="#5A5A5A" alignSelf="center" onPress={() => { }}>
+                <Text color="#5A5A5A" alignSelf="center" onPress={handleSkip}>
                     Skip
                 </Text>
             </VStack>

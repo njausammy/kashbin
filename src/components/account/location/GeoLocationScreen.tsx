@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Button, Text, VStack, View, Icon, HStack } from "@gluestack-ui/themed";
-import { router } from 'expo-router';
-import PageHeader from '../../PageHeader';
+import { Text, VStack } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import Loader from '../../Loader';
 import LocationAvatar from '../../Icons/location-icon'
 import { Pressable } from 'react-native';
@@ -13,6 +12,7 @@ interface IProps {
 const GeoLocationScreen = ({ onLocationFound }: IProps) => {
     const handleLocateMe = () => {
         // Implement location detection logic here
+        onLocationFound()
     };
 
     const handleEnterAddress = () => {

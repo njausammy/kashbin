@@ -1,5 +1,6 @@
 import { formatPhoneNumber } from "@/src/utils/format";
-import { ModalBackdrop, ModalContent, ModalHeader, ModalBody, VStack, Text, Heading, Button, Modal, Box, ButtonIcon } from "@gluestack-ui/themed";
+import { ModalBackdrop, ModalContent, ModalHeader, ModalBody, VStack, Text, Heading, Modal, Box } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import { router } from "expo-router";
 import React from "react";
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -35,7 +36,7 @@ const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
                     </Box>
                 </ModalHeader>
                 <ModalBody>
-                    <VStack space="md" alignItems="center">
+                    <VStack space="md"  >
                         <Box alignSelf="center" >
                             <Loader disableAnimation iconComp={<VerifyIcon />} />
                         </Box>
@@ -48,8 +49,7 @@ const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
                             backgroundColor="#DB1E36"
                             borderRadius={50}
                             height={56}
-                            width="$full"
-                            alignSelf="center"
+                            width="100%"
                             onPress={handleYes}
                         >
                             <Text

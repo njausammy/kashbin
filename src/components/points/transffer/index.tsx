@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Card, VStack, Text, Button, Pressable, HStack } from "@gluestack-ui/themed";
+import { Card, VStack, Text, Pressable, HStack } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';

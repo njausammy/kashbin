@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm, Controller } from "react-hook-form";
-import { Box, Button, Input, InputField, Progress, ProgressFilledTrack, Text, VStack } from "@gluestack-ui/themed";
+import {Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import { router } from 'expo-router';
-import { Image, } from 'react-native';
 import PageHeader from '../PageHeader';
 import DateInput from '../form/DateInput';
 
@@ -30,14 +30,14 @@ const AccountView = () => {
 
 
     const handleNext = async () => {
-        router.push('/account/location');
+        router.push('/location/geo-location');
     };
 
 
     return (
         <VStack backgroundColor="$white" flex={1}>
 
-            <PageHeader value={50} />
+            <PageHeader value={80} />
 
             <VStack marginTop={24} paddingHorizontal={24}>
                 <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>

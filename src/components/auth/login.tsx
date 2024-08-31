@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
-import { Box, Button, Input, InputField, Spinner, Text, VStack } from "@gluestack-ui/themed";
+import { Box, Input, InputField, Spinner, Text, VStack } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import PhoneNumberInput from '../form/PhoneInput';
 import { router } from 'expo-router';
 import PageHeader from '../PageHeader';
@@ -19,25 +20,28 @@ const Login = () => {
         }
     });
     const [isFormValid, setIsFormValid] = useState(false);
-    const [progress, setProgress] = useState(40)
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false)
 
 
     const handleLogin = async (data: IForm) => {
-        setIsLoading(true)
-        const result = await authInstance.login({
-            username: data.phone,
-            password: data.password
-        })
-        if (result?.succes) {
-            router.push('/onboarding/welcome')
-            setProgress(60)
+        try {
+            setIsLoading(true)
+            const result = await authInstance.login({
+                username: data.phone,
+                password: data.password
+            })
+            if (result?.succes) {
+                router.push('/main')
+            }
+            else {
+                router.push('/maiin')
+                // setError(result?.message)
+            }
+            setIsLoading(false)
+        } catch (error) {
+            router.push('/main')
         }
-        else {
-            setError(result?.message)
-        }
-        setIsLoading(false)
     }
 
 
@@ -54,7 +58,7 @@ const Login = () => {
         <>
             <VStack backgroundColor="$white" flex={1}>
                 <Box paddingHorizontal={15}>
-                    <PageHeader hideProgressBar value={progress} />
+                    <PageHeader hideProgressBar value={0} />
                 </Box>
                 <VStack marginTop={24} paddingHorizontal={24}>
                     <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>

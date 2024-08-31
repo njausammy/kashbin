@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { router } from 'expo-router';
 import { StyleSheet, Dimensions } from 'react-native';
-import { Box, Button, Text, VStack } from "@gluestack-ui/themed";
+import { Box, Text, VStack } from "@gluestack-ui/themed";
 import PagerView, { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
+import Button from '@/src/components/form/AnimatedButton';
 
 
 import Page from './Page';

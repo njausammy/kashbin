@@ -28,7 +28,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!isLoading) {
       if (!hasOnboarded) {
-        router.replace('/test');
+        router.replace('/onboarding');
       } else {
         router.replace('/auth/login');
       }

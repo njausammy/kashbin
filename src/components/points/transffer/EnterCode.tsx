@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from "react-hook-form"
-import { Box, Button, Card, HStack, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import { Box, Card, HStack, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import { router } from 'expo-router';
 import PageHeader from '../../PageHeader';
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Button, Text, VStack, View } from "@gluestack-ui/themed";
+import { Box, Text, VStack, View } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import { router } from 'expo-router';
 import PageHeader from '../PageHeader';
 import Loader from '../Loader';
@@ -18,7 +19,7 @@ const AuthHomeScreen = () => {
     return (
         <VStack backgroundColor="$white" flex={1} alignItems="center">
             <VStack width='100%' flex={1}>
-                <PageHeader value={10} />
+                <PageHeader value={15} />
                 <Box justifyContent="center" alignSelf="center" flex={1}>
                     <Loader iconPosition="top" disableAnimation iconComp={<SignupAvatar />} />
                 </Box>

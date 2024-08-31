@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, VStack, Text, Button, HStack, Input, InputField, Card, Alert, AlertText } from "@gluestack-ui/themed";
+import { Box, VStack, Text, Input, InputField, Card, Alert, AlertText } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import Icon from '@expo/vector-icons/AntDesign';
 import PageHeader from '../../PageHeader';
 import { useLocalSearchParams } from 'expo-router';
@@ -29,7 +30,7 @@ const RedeemPointsView = () => {
             } else {
                 setRedeemState('failed');
             }
-        }, 2000);
+        }, 3000);
     };
 
     const renderRedeemStatus = () => {
@@ -66,7 +67,7 @@ const RedeemPointsView = () => {
     return (
         <VStack backgroundColor="$white" flex={1} paddingHorizontal={24}>
             <PageHeader value={0} hideProgressBar />
-            <Text fontSize={22} fontWeight={600} color='#2A2A2A' >Redeem Points</Text>
+            <Text  marginTop={50} fontSize={22} fontWeight={600} color='#2A2A2A' >Redeem Points</Text>
             <Text fontSize={14} color="#5A5A5A" fontWeight={400} >Enter the number of points to redeem</Text>
 
 

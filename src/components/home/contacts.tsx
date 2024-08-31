@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Text, VStack, FlatList, Card, Input, InputField, Button } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
+import { ContactsSecondaryNavigation } from './header';
 
 interface ContactItemProps {
     contact: {
@@ -33,7 +34,6 @@ const ContactsScreen: React.FC = () => {
 
     return (
         <VStack flex={1}>
-
             <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
                 <Input
                     borderWidth={0}

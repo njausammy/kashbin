@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Text, VStack, HStack, FlatList, Card, Button, Pressable } from "@gluestack-ui/themed";
+import { Box, Text, VStack, HStack, FlatList, Card, Button, Pressable, Input, InputField, Alert, AlertText } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
 import Icon from '@expo/vector-icons/Ionicons';
+import AntDIcon from '@expo/vector-icons/AntDesign';
 
 
 interface ITransfer {
@@ -49,18 +50,36 @@ const PointsTransferScreen = () => {
 
     return (
         <VStack flex={1}>
+            <Alert marginHorizontal={15}
+                marginBottom={10} height={56} borderRadius={12} variant="solid" backgroundColor='#E8F5E9'>
+                <AntDIcon name="checkcircle" size={20} color="#1B5E21" />
+                <AlertText marginLeft={10}>
+                    <Text color="#1B5E21" fontWeight={400}>Points Balance: 3850 Value: KES 3850</Text>
+                </AlertText>
+            </Alert>
+            <Text marginHorizontal={15}
+             fontSize={18} fontWeight="bold" marginBottom={10}>Transfers</Text>
+
+            <Input
+                borderWidth={0}
+                borderRadius={16}
+                height={48}
+                backgroundColor='#fff'
+                marginHorizontal={15}
+                marginBottom={10}
+            >
+
+                <InputField
+                    type="text"
+                    placeholder='Search transfers'
+                />
+            </Input>
+
             <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={15} paddingVertical={10} backgroundColor='#FFFFFF'>
-                <Pressable onPress={() => router.push('/points/transffer')}>
-                    <Box backgroundColor="#DB1E36" padding={10} borderRadius={10} alignItems="center" marginBottom={10}>
-                        <Text color="white" fontSize={14}>My Points</Text>
-                        <Text color="white" fontSize={24} fontWeight="bold">{points}</Text>
-                        <Text color="white" fontSize={12}>Value: KES {value}</Text>
-                    </Box>
-                </Pressable>
-                <Text fontSize={18} fontWeight="bold" marginBottom={10}>Point Transfers</Text>
+
                 <FlatList
                     data={transfers}
-                    renderItem={({ item }) => <TransferItem transfer={item} />}
+                    renderItem={({ item }) => <TransferItem transfer={item as ITransfer} />}
                     keyExtractor={(item, index) => index.toString()}
                     contentContainerStyle={{ paddingHorizontal: 15 }}
                 />

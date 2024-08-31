@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
 import { useCreateEntity } from '@/src/api/queries';
-import { Button, Input, InputField, Text, VStack, Spinner, Box } from "@gluestack-ui/themed";
+import { Input, InputField, Text, VStack, Spinner, Box } from "@gluestack-ui/themed";
 import PhoneNumberInput from '../form/PhoneInput';
 import SignupModal from './Modal';
 import PageHeader from '../PageHeader';
 import { IUserRead, IUserWrite } from '@/src/types/users';
+import Button from '@/src/components/form/AnimatedButton';
 
 interface IFormValues {
     phone: string
@@ -26,7 +27,7 @@ const Signup = () => {
 
     const [isFormValid, setIsFormValid] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [progress, setProgress] = useState(20)
+    const [progress, setProgress] = useState(25)
     const [error, setError] = useState<string | null>(null);
 
     const toggleModal = () => {
@@ -41,17 +42,18 @@ const Signup = () => {
             password: data.password
         }, {
             onSuccess() {
-                setProgress(30);
+                setProgress(40);
                 toggleModal();
             },
             onError(error: any) {
-                console.error("Signup Error:", error);
-                if (error?.detail === 'The user with this phone number already exists in the system') {
-                    setError("Phone number exists");
-                }
-                else {
-                    setError("An unexpected error occurred.");
-                }
+                setProgress(40);
+                toggleModal();
+                // if (error?.detail === 'The user with this phone number already exists in the system') {
+                //     setError("Phone number exists");
+                // }
+                // else {
+                //     setError("An unexpected error occurred.");
+                // }
             }
         });
 

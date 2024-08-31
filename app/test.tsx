@@ -1,3 +1,3 @@
-import RedeemPointsView from "@/src/components/points/transffer/RedeemPoints";
+import PinSetupScreen from "@/src/components/auth/set-pin";
 
-export default RedeemPointsView
+export default PinSetupScreen

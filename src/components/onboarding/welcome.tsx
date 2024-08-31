@@ -1,13 +1,13 @@
 import React from 'react';
-import { Image, } from 'react-native';
-import { Box, Button, Text, VStack, Progress, ProgressFilledTrack, Heading } from "@gluestack-ui/themed";
+import { Box, Text, VStack, Heading } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import { router } from 'expo-router';
 import PageHeader from '../PageHeader';
 
 const HomeScreen = () => {
 
     const handleContinue = async () => {
-        router.push('/main');
+        router.push('/auth/login');
     };
 
     return (

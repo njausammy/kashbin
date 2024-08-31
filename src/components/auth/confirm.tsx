@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useForm } from "react-hook-form";
-import { Box, Button, Card, HStack, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import { Box, Card, HStack, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import Button from '@/src/components/form/AnimatedButton';
 import { router } from 'expo-router';
 import PageHeader from '../PageHeader';
 import Loader from '../Loader';
@@ -8,9 +8,8 @@ import SuccessIcon from '../Icons/success-icon';
 import FailIcon from '../Icons/fail-icon';
 
 const ConfirmSignup = () => {
-    const { handleSubmit, control, getValues, setValue } = useForm();
     const [code, setCode] = useState(['', '', '', '', '', '']);
-    const [progress, setProgress] = useState(40);
+    const [progress, setProgress] = useState(60);
     const [verificationState, setVerificationState] = useState<'processing' | 'success' | 'failed' | 'idle'>('idle');
     const inputRefs = useRef([]);
 
@@ -27,23 +26,26 @@ const ConfirmSignup = () => {
 
     const isAllFilled = code.every(digit => digit !== '');
 
-    useEffect(() => {
-        if (isAllFilled) {
-            setProgress(100);
-        } else {
-            setProgress(50);
-        }
-    }, [isAllFilled]);
 
     const handleVerify = async () => {
-        setProgress(60);
-        setVerificationState('processing');
-        const timeoutId = setTimeout(() => {
-            setVerificationState('success'); // Simulate successful verification
-        }, 4000); // Adjust delay as needed
+        if (verificationState === "failed") {
+            router.push('/auth/confirm');
+         }
+        else {
+            setVerificationState('processing');
+            const timeoutId = setTimeout(() => {
+                const enteredCode = code.join('');
+                if (enteredCode === '123456') {
+                    setProgress(80);
+                    setVerificationState('success');
+                } else {
+                    setVerificationState('failed');
+                }
+            }, 4000); // Simulate delay
 
-        // Cleanup function to clear the timeout in case the component unmounts prematurely
-        return () => clearTimeout(timeoutId);
+            // Cleanup function to clear the timeout in case the component unmounts prematurely
+            return () => clearTimeout(timeoutId);
+        }
     };
 
     useEffect(() => {
@@ -57,9 +59,8 @@ const ConfirmSignup = () => {
         }
     }, [verificationState, router]);
 
-    const isButtonDisabled = !isAllFilled || verificationState === "processing" || verificationState === "success"
-    const isResendDisabled = verificationState === "processing" || verificationState === "success"
-
+    const isButtonDisabled = !isAllFilled || verificationState === "processing" || verificationState === "success";
+    const isResendDisabled = verificationState === "processing" || verificationState === "success";
 
     return (
         <VStack backgroundColor="$white" flex={1}>
