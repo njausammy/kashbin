@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text, VStack, FlatList, Card, Input, InputField, Button } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
-import { ContactsSecondaryNavigation } from './header';
+import { ContactsSecondaryNavigation } from '../../header';
 
 interface ContactItemProps {
     contact: {
@@ -53,7 +53,7 @@ const ContactsScreen: React.FC = () => {
                 <Text marginTop={5} fontWeight="bold">Send or receive points and share or accept invites from your contacts.</Text>
                 <FlatList
                     data={contacts}
-                    renderItem={({ item }) => <ContactItem contact={item} />}
+                    renderItem={({ item }) => <ContactItem contact={item as any} />}
                     keyExtractor={(item, index) => index.toString()}
                     contentContainerStyle={{ paddingHorizontal: 15, marginTop: 10 }}
                 />
