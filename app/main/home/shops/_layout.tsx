@@ -12,7 +12,8 @@ export default function HomeLayout() {
                     headerShown: false
                 }}
             >
-                <Stack.Screen name="index" />
+                <Stack.Screen name="near-me" />
+                <Stack.Screen name="services" />
             </Stack>
         </>
     );

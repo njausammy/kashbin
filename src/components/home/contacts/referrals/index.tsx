@@ -22,7 +22,7 @@ const ReferralItem: React.FC<ReferralItemProps> = ({ referral }) => (
             <Text color='#414141' fontSize={14} fontWeight={400}>{referral.name}</Text>
             <Text color="#5A5A5A" fontSize={12} fontWeight={400}>{referral.phoneNumber}</Text>
         </VStack>
-        <Text color='#A0A0A0' fontSize={12} fontWeight={400}>Pending</Text>
+        <Text fontStyle="italic" color='#414141' fontSize={12} fontWeight={400}>Pending</Text>
     </Box>
 );
 
@@ -41,45 +41,15 @@ const ReferralsScreen: React.FC = () => {
     ];
 
     return (
-        <VStack flex={1}>
-            <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
-                <Input
-                    borderWidth={0}
-                    borderRadius={16}
-                    height={48}
-                    width="$full"
-                    backgroundColor='#F7F7F7'
-                >
-                    <InputField
-                        type="text"
-                        placeholder='Search referrals'
-                    />
-                </Input>
-            </Card>
-
-            <Card marginBottom={20} marginHorizontal={15} paddingHorizontal={15} paddingVertical={10} backgroundColor='#FFFFFF' flex={1}>
+        <VStack flex={1} marginHorizontal={4} paddingHorizontal={4} paddingVertical={4} backgroundColor='#FFFFFF'>
                 <FlatList
                     data={referrals}
                     renderItem={({ item }) => <ReferralItem referral={item as any} />}
                     keyExtractor={(item, index) => index.toString()}
                     contentContainerStyle={{ paddingHorizontal: 15, marginTop: 10 }}
+                    borderTopWidth={1} borderTopColor="#E8E8E8" 
                 />
-                <Button
-                    borderRadius={20}
-                    borderWidth={1}
-                    borderColor='#DB1E36'
-                    backgroundColor='#FFFFFF'
-                    paddingHorizontal={10}
-                    height={27}
-                    width={137}
-                    alignSelf="flex-end"
-                    marginTop={20}
-                    marginBottom={20}
-                    onPress={() => handleNavigation('/all-referrals')}
-                >
-                    <Text fontSize={12} color='#DB1E36'>All Referrals 34</Text>
-                </Button>
-            </Card>
+        
         </VStack>
     );
 };

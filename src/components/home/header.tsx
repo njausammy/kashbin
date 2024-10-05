@@ -1,9 +1,6 @@
-import { HStack, Box, Card, Text } from "@gluestack-ui/themed";
-import { router, useNavigation, usePathname } from "expo-router";
-import React, { useEffect, useState } from "react";
-import { NavItem, TopNavigation, TTopNavigationTab } from './navigation';
+import React from 'react';
 import FontAwesomeIcon from '@expo/vector-icons/FontAwesome';
-// @icons
+// Import your icons here
 import NearIcon from "../../components/Icons/near-me";
 import GiftsIcon from "../../components/Icons/gifts";
 import ServicesIcon from "../../components/Icons/people-solid";
@@ -16,64 +13,49 @@ import ConnectedIcon from "../../components/Icons/connected";
 import ReferralsIcon from "../../components/Icons/referrals";
 import InvitesIcon from "../../components/Icons/invites";
 import AllContactsIcon from "../../components/Icons/contacts-solid";
-import useActiveRoute from "@/src/hooks/useActiveRoute";
+import SecondaryNavigation from '../Navigation/SecondaryNavigation';
+import { Box, HStack, Card, Text } from '@gluestack-ui/themed';
+import { router } from 'expo-router';
+import { TopNavigation } from './navigation';
 
-interface SecondaryNavigationProps {
-    onNavigate: (path: string) => void;
-    activeItem: string;
-}
 
-// Secondary navigation for shops screen
-export const ShopsSecondaryNavigation = () => {
-    return (
-        <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
 
-            <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-                <NavItem color="#43A048" icon={<NearIcon />} label="Near Me" onPress={() => router.push('/points')} />
-                <NavItem icon={<GiftsIcon />} label="Gifts" onPress={() => router.push('/points')} />
-                <NavItem icon={<ServicesIcon />} label="Services" onPress={() => router.push('/points')} />
-                <NavItem icon={<ShopsIcon />} label="All Shops" onPress={() => router.push('/points')} />
-            </HStack>
-        </Card>
-    )
-};
+export const ShopsSecondaryNavigation = () => (
+    <SecondaryNavigation
+        tabs={[
+            { icon: <NearIcon width={18} height={18} />, label: "Near Me", route: "/main/home/shops", "name": "near-me" },
+            { icon: <ServicesIcon width={18} height={18} />, label: "Services", route: "/main/home/shops/services", name: "services" },
+        ]}
+        showSearch
+    />
+);
 
-// Secondary navigation for points screen
-export const PointsSecondaryNavigation = () => {
-    const activeTab = useActiveRoute();
-    const activeColor = "#1E3AE5";
-    const inactiveColor = "#414141";
+export const PointsSecondaryNavigation = () => (
+    <SecondaryNavigation
+        tabs={[
+            { icon: <PointsIcon width={18} height={18} />, label: "Gifts", route: "/main/home/points", name: "gifts" },
+            { icon: <OffersIcon width={18} height={18} />, label: "Offers", route: "/main/home/points/offers", name: "offers" },
+            { icon: <DealsIcon width={18} height={18} />, label: "Deals", route: "/main/home/points/deals", name: "deals" },
+            { icon: <CouponsIcon width={18} height={18} />, label: "Coupons", route: "/main/home/points/coupons", name: "coupons" },
+        ]}
+        showSearch
+    />
+);
 
-    const getColor = (tabName: string) => (activeTab === tabName ? activeColor : inactiveColor);
-    const getFontWeight = (tabName: string) => (activeTab === tabName ? 700 : 400);
-
-    return (<Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
-        <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-            <NavItem fontWeight={getFontWeight('transfers')} color={getColor("transfers")} icon={<PointsIcon />} label="Points" onPress={() => router.push('/main/home/points')} />
-            <NavItem fontWeight={getFontWeight('offers')} color={getColor("offers")}  icon={<OffersIcon />} label="Offers" onPress={() => router.push('/main/home/points/offers')} />
-            <NavItem fontWeight={getFontWeight('deals')} color={getColor("deals")}  icon={<DealsIcon />} label="Deals" onPress={() => router.push('/main/home/points/deals')} />
-            <NavItem fontWeight={getFontWeight('coupons')} color={getColor("coupons")}  icon={<CouponsIcon />} label="Coupons" onPress={() => router.push('/main/home/points/coupons')} />
-        </HStack>
-    </Card>
-    );
-}
-
-// Secondary navigation for contacts screen
 export const ContactsSecondaryNavigation = () => (
-    <Card marginBottom={10} marginHorizontal={15} paddingHorizontal={10} paddingVertical={10} backgroundColor='#FFFFFF'>
+    <SecondaryNavigation
 
-        <HStack justifyContent="space-around" backgroundColor="white" paddingVertical={15}>
-            <NavItem icon={<ConnectedIcon />} label="Connected" onPress={() => router.push('/points')} />
-            <NavItem icon={<ReferralsIcon />} label="Referrals" onPress={() => router.push('/points')} />
-            <NavItem icon={<InvitesIcon />} label="Invites" onPress={() => router.push('/points')} />
-            <NavItem icon={<AllContactsIcon />} label="All Contacts" onPress={() => router.push('/points')} />
-        </HStack>
-    </Card>
+        tabs={[
+            { icon: <ConnectedIcon />, label: "Connected", route: "/main/home/contacts/connected", name: "connected" },
+            { icon: <ReferralsIcon />, label: "Referrals", route: "/main/home/contacts/referrals", name: "referrals" },
+            { icon: <InvitesIcon />, label: "Invites", route: "/main/home/contacts/invites", name: "invites" },
+            { icon: <AllContactsIcon />, label: "All Contacts", route: "/main/home/contacts/all-contacts", name: "all-contacts" },
+        ]}
+        showSearch
+    />
 );
 
 const HomeHeader = () => {
-
-
 
     const handleNavigation = (route: string) => {
         router.push(route);
@@ -81,7 +63,7 @@ const HomeHeader = () => {
 
 
     return (
-        <Box>
+        <Box backgroundColor='#fff'>
             <Box marginBottom={10} backgroundColor="#DB1E36" paddingBottom={10} paddingHorizontal={10}>
                 <HStack marginBottom={5} paddingTop={52} space="md">
                     <FontAwesomeIcon name="map-marker" size={24} color="#FFFFFF" />

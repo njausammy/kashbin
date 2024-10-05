@@ -4,8 +4,8 @@ import { IconProps } from "./types";
 
 const SVGComponent = (props: IconProps) => (
   <Svg
-    width={40}
-    height={40}
+    width={18}
+    height={18}
     viewBox="0 0 40 40"
     fill="none"
     {...props}

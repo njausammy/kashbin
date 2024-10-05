@@ -10,7 +10,8 @@ import ProfileIcon from "../../src/components/Icons/profile"
 
 const MainLayout = () => {
     return (
-        <Tabs screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false, tabBarShowLabel: false, }}>
+
+        <Tabs  screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false, tabBarShowLabel: false, }}>
             <Tabs.Screen
                 name="home"
                 options={{

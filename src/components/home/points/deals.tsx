@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Box, Text, VStack, HStack, FlatList, Card, Button, Image, Input, InputField } from "@gluestack-ui/themed";
+import { Text, VStack, HStack, FlatList, Button, Image, Input, InputField, Pressable, Icon } from "@gluestack-ui/themed";
 import { router } from 'expo-router';
+import { Entypo } from '@expo/vector-icons';
 
 interface IDeal {
     image: string;
     name: string;
     price: number;
+    savings: number;
+    connections: string; // e.g., "2 connections needed" or "3/4 invited"
     status: string;
     timeLeft: string;
 }
@@ -15,91 +18,79 @@ interface IDealItemProps {
 }
 
 const DealsScreen = () => {
-    const [selectedTab, setSelectedTab] = useState('Online');
-
-    const handleNavigation = (route: string) => {
-        router.push(route);
-    };
+    const [selectedTab, setSelectedTab] = useState('All deals');
 
     const deals: IDeal[] = [
-        { image: require('../../../../assets/images/points-4.png'), name: 'Car Wash', price: 4000, status: 'Invite', timeLeft: 'in 4hrs 45min' },
-        { image: require('../../../../assets/images/points-1.png'), name: 'Monthly shopping bundle', price: 2300, status: 'Invited', timeLeft: 'in 1hr 27min' },
-        { image: require('../../../../assets/images/points-2.png'), name: 'HeHa Cooking Oil 3L', price: 2500, status: 'Completed', timeLeft: 'in 10min' },
-        { image: require('../../../../assets/images/points-3.png'), name: 'Ndovu maize Flour 2Kg pack x 2', price: 1500, status: 'Invite', timeLeft: 'in 13hrs 45min' },
+        { image: require('../../../../assets/images/points-4.png'), name: 'Car Wash', price: 4000, savings: 450, connections: '2 connections needed', status: 'Invite', timeLeft: '4Hrs 45min' },
+        { image: require('../../../../assets/images/points-1.png'), name: 'Marafiki bundle', price: 4000, savings: 450, connections: '3/4 invited', status: 'Invited', timeLeft: '4Hrs 45min' },
+        { image: require('../../../../assets/images/points-2.png'), name: 'Halisi Cooking oil 20L', price: 3750, savings: 350, connections: '4/4 invited', status: 'Completed', timeLeft: '4Hrs 45min' },
+        { image: require('../../../../assets/images/points-3.png'), name: 'Ndovu maize flour 2Kgs pack x 2', price: 120, savings: 100, connections: '4 connections needed', status: 'Invite', timeLeft: '4Hrs 45min' },
     ];
 
     const DealItem = ({ deal }: IDealItemProps) => (
-        <Card marginBottom={10} borderBottomWidth={1} borderBottomColor="#E8E8E8" height={86} paddingVertical={15} flexDirection="row" justifyContent="space-between" alignItems="center">
+        <VStack marginBottom={10} borderBottomWidth={1} borderBottomColor="#E8E8E8" height={100} paddingVertical={10} flexDirection="row" justifyContent="space-between" alignItems="center">
             <HStack alignItems="center">
                 <Image
                     source={deal.image}
                     alt="Deal Image"
-                    width={40}
-                    height={40}
+                    width={60}
+                    height={80}
                     alignSelf='center'
                 />
                 <VStack marginLeft={10}>
-                    <Text color='#414141' fontSize={14} fontWeight={400}>{deal.name}</Text>
-                    <Text color='#888888' fontSize={12}>KES {deal.price}</Text>
-                    <Text color='#888888' fontSize={12}>Deal ends {deal.timeLeft}</Text>
+                    <Text color='#414141' fontSize={14} fontWeight="bold">{deal.name}</Text>
+                    <Text color='#414141' fontSize={14}>Spend KES {deal.price} • Save KES {deal.savings}</Text>
+                    <Text color='#888888' fontSize={12}>{deal.connections}</Text>
+                    <Text color='#FF5C5C' fontSize={12}>Deal ends in: {deal.timeLeft}</Text>
                 </VStack>
             </HStack>
-    
+
             <Button
                 borderRadius={20}
-                backgroundColor={deal.status === 'Completed' ? '#bcbcbc' : (deal.status === "Invite" ? "#DB1E36" : "#43A048")}
+                borderWidth={1}
+                borderColor={deal.status === 'Completed' ? '#bcbcbc' : (deal.status === 'Invited' ? 'transparent' : '#DB1E36')}
+                backgroundColor={deal.status === 'Completed' ? '#f0f0f0' : (deal.status === 'Invited' ? 'transparent' : '#FFF')}
                 paddingHorizontal={10}
-                height={27}
-                width={80}
-                variant="solid"
+                height={30}
+                width={90}
             >
-                <Text fontSize={12} color="#FFFFFF">
-                    {deal.status}
-                </Text>
+                {deal.status === 'Invite' ? (
+                    <HStack>
+                        <Text fontSize={12} color='#DB1E36'>
+                            Invite
+                        </Text>
+                        <Entypo name="mail" size={16} color="#DB1E36" style={{ marginLeft: 4 }} />
+                    </HStack>
+                ) : deal.status === 'Invited' ? (
+                    <Text fontSize={12} color='#43A048'>
+                        Invited ✓
+                    </Text>
+                ) : (
+                    <Text fontSize={12} color='#bcbcbc'>
+                        Completed
+                    </Text>
+                )}
             </Button>
-        </Card>
+        </VStack>
     );
 
     return (
-        <VStack flex={1}>
-            <Input
-                borderWidth={0}
-                borderRadius={16}
-                height={48}
-                backgroundColor='#fff'
-                marginHorizontal={15}
-                marginBottom={10}
-            >
-                <InputField
-                    type="text"
-                    placeholder='Search deals'
-                />
-            </Input>
+        <VStack flex={1} padding={4} backgroundColor='#fff'>
 
+            {/* Tab Navigation */}
             <HStack paddingHorizontal={15} justifyContent="center" marginBottom={10}>
-                <Button
-                    borderTopStartRadius={10}
-                    borderBottomStartRadius={10}
-                    backgroundColor={selectedTab === 'Online' ? '#DB1E36' : '#FFFFFF'}
-                    onPress={() => setSelectedTab('Online')}
-                    height={40}
-                    flex={1}
-                >
-                    <Text color={selectedTab === 'Online' ? '#FFF' : '#888888'}>Online</Text>
-                </Button>
-                <Button
-                    borderTopEndRadius={10}
-                    borderBottomEndRadius={10}
-                    backgroundColor={selectedTab === 'In Person' ? '#DB1E36' : '#FFFFFF'}
-                    onPress={() => setSelectedTab('In Person')}
-                    height={40}
-                    flex={1}
-                >
-                    <Text color={selectedTab === 'In Person' ? '#FFF' : '#888888'}>In Person</Text>
-                </Button>
-
+                <Pressable flex={1} onPress={() => setSelectedTab('All deals')} style={{ paddingBottom: 10, marginRight: 10, borderBottomWidth: selectedTab === 'All deals' ? 2 : 0, borderBottomColor: selectedTab === 'All deals' ? '#DB1E36' : 'transparent' }}>
+                    <Text color={selectedTab === 'All deals' ? '#DB1E36' : '#888888'} fontSize={16}>All deals</Text>
+                </Pressable>
+                <Pressable flex={1} onPress={() => setSelectedTab('Online')} style={{ paddingBottom: 10, marginRight: 10, borderBottomWidth: selectedTab === 'Online' ? 2 : 0, borderBottomColor: selectedTab === 'Online' ? '#DB1E36' : 'transparent' }}>
+                    <Text color={selectedTab === 'Online' ? '#DB1E36' : '#888888'} fontSize={16}>Online</Text>
+                </Pressable>
+                <Pressable flex={1} onPress={() => setSelectedTab('At Kiosks')} style={{ paddingBottom: 10, borderBottomWidth: selectedTab === 'At Kiosks' ? 2 : 0, borderBottomColor: selectedTab === 'At Kiosks' ? '#DB1E36' : 'transparent' }}>
+                    <Text color={selectedTab === 'At Kiosks' ? '#DB1E36' : '#888888'} fontSize={16}>At Kiosks</Text>
+                </Pressable>
             </HStack>
 
+            {/* Deal List */}
             <FlatList
                 data={deals} // You can filter deals here based on the selected tab if needed
                 renderItem={({ item }) => <DealItem deal={item as IDeal} />}

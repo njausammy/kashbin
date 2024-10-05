@@ -1,6 +1,6 @@
 import ContactsScreen from "@/src/components/home/contacts";
 
-export default function Contacts() {
+export default function Referrals() {
   return (
     <ContactsScreen />
   );

@@ -30,26 +30,26 @@ export const TopNavigation = ({ onNavigate }: { onNavigate: (path: string) => vo
     const activeTab = useActiveRoute();
     const activeColor = "#DB1E36";
     const inactiveColor = "#5A5A5A";
-    console.log(activeTab)
+    console.log({activeTab})
 
     const getColor = (tabNames: string[]) => (tabNames.includes(activeTab) ? activeColor : inactiveColor);
 
     return (
         <HStack justifyContent="space-around">
             <NavItem
-                color={getColor(["shops"])}
+                color={getColor(["near-me", "services"])}
                 icon={<ShopIcon color={getColor(["shops"])} />}
                 label="Shops"
                 onPress={() => onNavigate('/main/home/shops')}
             />
             <NavItem
-                color={getColor(["transfers"])}
-                icon={<PointsIcon color={getColor(["transfers", 'offers','deals' , 'coupons'])} />}
+                color={getColor(["gifts", "offers", "deals", "coupons"])}
+                icon={<PointsIcon color={getColor(["gifts", 'offers','deals' , 'coupons'])} />}
                 label="Points"
                 onPress={() => onNavigate('/main/home/points')}
             />
             <NavItem
-                color={getColor(["contacts"])}
+                color={getColor(["connected", "referrals", "invites", "all-contacts"])}
                 icon={<PeopleIcon color={getColor(["contacts"])} />}
                 label="Contacts"
                 onPress={() => onNavigate('/main/home/contacts')}

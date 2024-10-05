@@ -12,7 +12,7 @@ export default function HomeLayout() {
                     headerShown: false
                 }}
             >
-                <Stack.Screen name="transfers" />
+                <Stack.Screen name="gifts" />
                 <Stack.Screen name="offers" />
                 <Stack.Screen name="deals" />
                 <Stack.Screen name="coupons" />

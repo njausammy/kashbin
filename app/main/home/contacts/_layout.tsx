@@ -13,7 +13,10 @@ export default function HomeLayout() {
                     headerShown: false
                 }}
             >
-                <Stack.Screen name="index" />
+                <Stack.Screen name="connected" />
+                <Stack.Screen name="referrals" />
+                <Stack.Screen name="invites" />
+                <Stack.Screen name="all-contacts" />
             </Stack>
         </>
     );
