@@ -28,9 +28,19 @@ export const NavItem = ({ icon, label, onPress, color, fontWeight = 400 }: {
 
 export const TopNavigation = ({ onNavigate }: { onNavigate: (path: string) => void }) => {
     const activeTab = useActiveRoute();
+    console.log({ activeTab })
+    const activeRoute = useActiveRoute();
+
+    // Define the routes where you want to hide the navigation
+    const hideNavigationForRoutes = ["connected-view"];
+
+    // Conditionally render the navigation
+    if (hideNavigationForRoutes.includes(activeRoute)) {
+        return null; // Return null to hide the component
+    }
+
     const activeColor = "#DB1E36";
     const inactiveColor = "#5A5A5A";
-    console.log({activeTab})
 
     const getColor = (tabNames: string[]) => (tabNames.includes(activeTab) ? activeColor : inactiveColor);
 
@@ -44,7 +54,7 @@ export const TopNavigation = ({ onNavigate }: { onNavigate: (path: string) => vo
             />
             <NavItem
                 color={getColor(["gifts", "offers", "deals", "coupons"])}
-                icon={<PointsIcon color={getColor(["gifts", 'offers','deals' , 'coupons'])} />}
+                icon={<PointsIcon color={getColor(["gifts", 'offers', 'deals', 'coupons'])} />}
                 label="Points"
                 onPress={() => onNavigate('/main/home/points')}
             />

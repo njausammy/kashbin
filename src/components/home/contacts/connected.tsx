@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Text, VStack, FlatList, Card, Input, InputField, Button, HStack, Pressable } from "@gluestack-ui/themed";
+import { router } from 'expo-router';
+import { IUserRead } from '@/src/types/users';
 
 interface Contact {
     name: string;
@@ -9,11 +11,11 @@ interface Contact {
 
 interface ContactItemProps {
     contact: Contact;
-    onToggleSelect: (contact: Contact) => void;
+    onContactClick: (contact: Contact) => void;
 }
 
-const ContactItem: React.FC<ContactItemProps> = ({ contact, onToggleSelect }) => (
-    <Pressable onPress={() => onToggleSelect(contact)}>
+const ContactItem: React.FC<ContactItemProps> = ({ contact, onContactClick }) => (
+    <Pressable onPress={() => onContactClick(contact)}>
         <Box borderBottomWidth={1} borderBottomColor="#E8E8E8" paddingVertical={15} flexDirection="row" justifyContent="space-between" alignItems="center">
             <HStack alignItems="center" space="md">
                 <Box width={40} height={40} borderRadius={20} backgroundColor="#E0E0E0" justifyContent="center" alignItems="center">
@@ -61,9 +63,12 @@ const ConnectedScreen: React.FC = () => {
         console.log('Searching for:', searchText);
     };
 
-    const handleAllContactsPress = (): void => {
-        // Implement "All Contacts" button functionality here
-        console.log('All Contacts button pressed');
+    const handleAllContactsPress = (user: Contact): void => {
+        
+        router.push({
+            pathname: '/main/home/contacts/connected-view',
+            params: { user: JSON.stringify(user) },
+        });
     };
 
     return (
@@ -71,7 +76,7 @@ const ConnectedScreen: React.FC = () => {
 
             <FlatList
                 data={contacts}
-                renderItem={({ item }) => <ContactItem contact={item as Contact} onToggleSelect={handleToggleSelect} />}
+                renderItem={({ item }) => <ContactItem contact={item as Contact} onContactClick={handleAllContactsPress} />}
                 keyExtractor={(item, index) => index.toString()}
                 borderTopWidth={1} borderTopColor="#E8E8E8"
             />

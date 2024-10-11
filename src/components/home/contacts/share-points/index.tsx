@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VStack, Text, Card, HStack, IconButton, Image, TextInput } from "@gluestack-ui/themed";
+import { VStack, Text, Card, HStack } from "@gluestack-ui/themed";
 import Button from '@/src/components/form/AnimatedButton';
 import { router, useLocalSearchParams } from 'expo-router';
 
