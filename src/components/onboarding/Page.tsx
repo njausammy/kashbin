@@ -1,12 +1,15 @@
 import React from 'react'
-import { Box, VStack, Text, Heading, Image, StatusBar } from '@gluestack-ui/themed'
+import { Box, VStack, Text, Heading } from '@gluestack-ui/themed'
 import { Dimensions } from 'react-native'
+import { SvgProps } from 'react-native-svg'
+
 type PageProps = {
   imageKey: number | string
   title: string
-  WelcomeImage: any
+  subtitle: string
+  WelcomeImage: React.FC<SvgProps> // SVG Component
   imageHeight: number
-  imageWidth:number
+  imageWidth: number
 }
 
 
@@ -19,41 +22,48 @@ export const getHeight = (height: number) => {
 const Page = ({
   imageKey,
   title,
+  subtitle,
   WelcomeImage,
   imageHeight,
   imageWidth
 }: PageProps) => {
+  const SvgComponent = WelcomeImage;
+
   return (
     <VStack>
-
       <Box
-      height={250}
-      alignItems="center"
-      justifyContent="center"
+        height={250}
+        alignItems="center"
+        justifyContent="center"
       >
-        <Image
-          source={WelcomeImage}
-          alt="Welcome Image"
+        <SvgComponent
           width={imageWidth}
           height={imageHeight}
-          marginTop={imageKey == 2 ? getHeight(4) : 0}
-          alignSelf='center'
-
         />
       </Box>
       <Box marginTop={getHeight(60)} paddingHorizontal={24}>
-        <Heading
-          textAlign="center"
-          lineHeight={41}
-          color={"#2A2A2A"}
-          fontSize={34}
-          fontWeight={600}
-          fontFamily="$heading"
-          padding={30}
-        >
-
-          {title}
-        </Heading>
+        <VStack space="sm" alignItems="center">
+          <Heading
+            textAlign="center"
+            lineHeight={41}
+            color={"#2A2A2A"}
+            fontSize={30}
+            fontWeight={700}
+            fontFamily="$heading"
+          >
+            {title}
+          </Heading>
+          <Text
+            textAlign="center"
+            color="#5A5A5A"
+            fontSize={16}
+            fontWeight={400}
+            lineHeight={24}
+            paddingHorizontal={20}
+          >
+            {subtitle}
+          </Text>
+        </VStack>
       </Box>
     </VStack>
   )

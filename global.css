@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Kash Chain Brand Colors - Deep Blue + Gold */
+:root {
+  /* Primary Brand */
+  --brand-blue: #1E40AF;
+  --brand-gold: #F59E0B;
+
+  /* Functional Colors */
+  --success-green: #22C55E;
+  --warning-orange: #F97316;
+  --error-red: #DC2626;
+  --info-blue: #3B82F6;
+
+  /* Neutral (Elephant Identity) */
+  --charcoal: #1C1C1E;
+  --elephant-grey: #8E8E93;
+  --light-grey: #E5E7EB;
+  --white: #FFFFFF;
+
+  /* Legacy (for gradual migration) */
+  --brand-green: #1E40AF; /* Maps to blue now */
+  --brand-dark: #1C1C1E;
+  --brand-gray: #8E8E93;
+  --brand-light-gray: #E5E7EB;
+  --brand-bg: #F5F5F5;
+}

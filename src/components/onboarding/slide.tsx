@@ -3,20 +3,22 @@ import { router } from 'expo-router';
 import { StyleSheet, Dimensions } from 'react-native';
 import { Box, Text, VStack } from "@gluestack-ui/themed";
 import PagerView, { PagerViewOnPageSelectedEvent } from 'react-native-pager-view';
+import { SvgProps } from 'react-native-svg';
 import Button from '@/src/components/form/AnimatedButton';
-
 
 import Page from './Page';
 import Dot from './Dot';
 import LocalStorage from '@/src/utils/LocalStorage';
 
-const Image1 = require('../../../assets/images/nyl-logo.png');
-const Image2 = require('../../../assets/images/pay-hand.png');
-const Image3 = require('../../../assets/images/friends.png');
+// Updated onboarding images with Deep Blue + Gold branding (SVG Components)
+import SendIcon from '../../../assets/images/onboarding-send.svg';
+import CashInIcon from '../../../assets/images/onboarding-cashin.svg';
+import MerchantsIcon from '../../../assets/images/onboarding-merchants.svg';
 
 export interface PageInterface {
   title: string;
-  WelcomeImg: any;
+  subtitle: string;
+  WelcomeImg: React.FC<SvgProps>; // SVG Component
   top: number;
   indicatorTop: string
   imageHeight: number
@@ -31,28 +33,31 @@ const deviceHeight = Dimensions.get('screen').height;
 
 export const SLIDER_DATA: PageInterface[] = [
   {
-    title: 'Karibu, pata points unaponunua bidhaa kwa duka!  ',
-    WelcomeImg: Image1,
+    title: 'Send Money Instantly',
+    subtitle: 'Send USDT to anyone with just their phone number',
+    WelcomeImg: SendIcon,
     top: 142,
     indicatorTop: '43%',
-    imageHeight: 263,
-    imageWidth: 305
+    imageHeight: 200,
+    imageWidth: 330
   },
   {
-    title: 'Tumia points kununua bidhaa kwa duka!',
-    WelcomeImg: Image2,
+    title: 'Cash In & Out Easily',
+    subtitle: 'Buy crypto with M-Pesa, cash out anytime',
+    WelcomeImg: CashInIcon,
     top: 142,
     indicatorTop: '43%',
-    imageHeight: 136,
-    imageWidth: 136
+    imageHeight: 200,
+    imageWidth: 330
   },
   {
-    title: 'Sambaza points na marafiki!',
-    WelcomeImg: Image3,
+    title: 'Pay Merchants',
+    subtitle: 'Pay at shops accepting crypto payments',
+    WelcomeImg: MerchantsIcon,
     top: 142,
     indicatorTop: '43%',
-    imageHeight: 253,
-    imageWidth: 275
+    imageHeight: 200,
+    imageWidth: 330
   },
 ];
 
@@ -76,7 +81,7 @@ const OnboardingSlide = () => {
   const handleNext = async () => {
     if (currentPage === 2) {
       LocalStorage.setItem('hasOnboarded', 'onboard');
-      router.push('/auth/home');
+      router.push('/auth/phone');
     } else {
       pageRef.current?.setPage(currentPage + 1);
     }
@@ -98,6 +103,7 @@ const OnboardingSlide = () => {
               key={index.toString()}
               imageKey={index}
               title={item.title}
+              subtitle={item.subtitle}
               WelcomeImage={item.WelcomeImg}
               imageHeight={item.imageHeight}
               imageWidth={item.imageWidth}
@@ -115,7 +121,7 @@ const OnboardingSlide = () => {
       </Box>
 
       <Button
-        backgroundColor="#DB1E36"
+        backgroundColor="#1E40AF"
         borderRadius={50}
         paddingHorizontal={10}
         onPress={handleNext}
@@ -124,8 +130,9 @@ const OnboardingSlide = () => {
         width={360}
         alignSelf="center"
       >
-
-        <Text color='white'>Next</Text>
+        <Text color='white' fontSize={16} fontWeight={600}>
+          {currentPage === 2 ? 'Get Started' : 'Next'}
+        </Text>
       </Button>
     </Box>
   );

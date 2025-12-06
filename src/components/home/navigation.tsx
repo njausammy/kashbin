@@ -39,7 +39,7 @@ export const TopNavigation = ({ onNavigate }: { onNavigate: (path: string) => vo
         return null; // Return null to hide the component
     }
 
-    const activeColor = "#DB1E36";
+    const activeColor = "#DC2626";
     const inactiveColor = "#5A5A5A";
 
     const getColor = (tabNames: string[]) => (tabNames.includes(activeTab) ? activeColor : inactiveColor);

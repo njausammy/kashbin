@@ -134,7 +134,7 @@ const AccountView = () => {
                 </VStack>
 
                 <Button
-                    backgroundColor={isFormValid ? "#DB1E36" : "#B8B8B8"}
+                    backgroundColor={isFormValid ? "#DC2626" : "#B8B8B8"}
                     borderRadius={50}
                     marginTop={30}
                     height={56}

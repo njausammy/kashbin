@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NiYaLeo",
-    "slug": "niyaleo-mobile",
+    "name": "Kash Chain",
+    "slug": "kashchain",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "myapp",
@@ -13,14 +13,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.nyakaru.niyaleomobile"
+      "bundleIdentifier": "com.kashchain.wallet"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/shop.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.nyakaru.niyaleomobile"
+      "package": "com.kashchain.wallet"
     },
     "web": {
       "bundler": "metro",
@@ -29,7 +29,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
@@ -38,11 +39,17 @@
       "router": {
         "origin": false
       },
+      "DEVELOPER_MODE": false,
       "eas": {
-        "projectId": "28b207ba-7180-45f4-9586-a60cd4b350ca"
-      },
-      "DEVELOPER_MODE": true
+        "projectId": "68b75687-26be-4a81-b136-6e3ce73204e5"
+      }
     },
-    "owner": "nyakaru"
+    "owner": "mbugwasami",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/68b75687-26be-4a81-b136-6e3ce73204e5"
+    }
   }
 }

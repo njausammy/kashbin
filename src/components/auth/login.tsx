@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
 import { Box, Input, InputField, Spinner, Text, VStack } from "@gluestack-ui/themed";
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import Button from '@/src/components/form/AnimatedButton';
 import PhoneNumberInput from '../form/PhoneInput';
 import { router } from 'expo-router';
@@ -56,6 +57,7 @@ const Login = () => {
 
     return (
         <>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <VStack backgroundColor="$white" flex={1}>
                 <Box paddingHorizontal={15}>
                     <PageHeader hideProgressBar value={0} />
@@ -68,7 +70,10 @@ const Login = () => {
                         Enter your registered mobile number to log in.
                     </Text>
 
-                    <PhoneNumberInput control={control} />
+                    <PhoneNumberInput
+                        control={control}
+                        onSubmitEditing={() => Keyboard.dismiss()}
+                    />
 
                     <VStack space="xs" marginTop={24}>
                         <Text fontSize={16} color="#414141">
@@ -90,6 +95,10 @@ const Login = () => {
                                         onChangeText={onChange}
                                         value={value}
                                         secureTextEntry
+                                        returnKeyType="done"
+                                        onSubmitEditing={() => {
+                                            Keyboard.dismiss();
+                                        }}
                                     />
                                 </Input>
                             )}
@@ -101,7 +110,7 @@ const Login = () => {
                         </Text>
                     )}
                     <Button
-                        backgroundColor={isFormValid ? "#DB1E36" : "#B8B8B8"}
+                        backgroundColor={isFormValid ? "#DC2626" : "#B8B8B8"}
                         borderRadius={50}
                         marginTop={300}
                         height={56}
@@ -123,6 +132,7 @@ const Login = () => {
                     </Button>
                 </VStack>
             </VStack>
+            </TouchableWithoutFeedback>
         </>
     );
 };

@@ -1,7 +1,6 @@
-import Signup from "@/src/components/auth/signup";
+import { Colors } from '@/src/constants/Colors';
+// Redirect to new phone signup flow
 
 export default function SignupScreen() {
-  return (
-    <Signup />
-  );
+  return <Redirect href="/auth/phone" />;
 }

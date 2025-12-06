@@ -12,7 +12,7 @@ const Dot: React.FC<DotProps> = ({ index, currentPage }) => {
     <View
       style={[
         styles.dot,
-        { backgroundColor: currentPage === index ? '#DB1E36' : '#D0D0D0', width: currentPage === index ? 16 : 37 },
+        { backgroundColor: currentPage === index ? '#1E40AF' : '#E5E7EB', width: currentPage === index ? 16 : 37 },
       ]}
     />
   )

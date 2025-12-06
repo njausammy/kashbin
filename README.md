@@ -1,6 +1,6 @@
-# Welcome to Niyaleo 👋
+# Kash Chain - Crypto Wallet App 💰
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile crypto wallet application built with Expo and React Native. Send USDT, cash in/out with M-Pesa, and pay at crypto-accepting merchants.
 
 ## Get started
 
@@ -25,22 +25,22 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## Features
 
-When you're ready, run:
+- ✅ Phone + PIN authentication
+- ✅ USDT wallet with balance tracking
+- ✅ Send/Receive USDT
+- ✅ Merchant payments
+- ✅ Transaction history
+- 🚧 KYC verification (in progress)
+- 🚧 M-Pesa integration (planned)
 
-```bash
-yarn reset-project
-```
+## Documentation
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- See `CURRENT_STRUCTURE.md` for current app architecture
+- See `PHASE1_COMPLETE.md` for Phase 1 implementation details
+- See `CLAUDE.md` for repository guidelines
+- See `_archive/README.md` for archived features
 
 ## Build && Deployment
 - eas build --platform android

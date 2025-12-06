@@ -31,7 +31,7 @@ const AuthHomeScreen = () => {
                 <VStack flex={1} justifyContent="center">
                     <VStack>
                         <Button
-                            backgroundColor="#DB1E36"
+                            backgroundColor="#DC2626"
                             borderRadius={50}
                             paddingHorizontal={10}
                             height={56}
@@ -42,7 +42,7 @@ const AuthHomeScreen = () => {
                             <Text color='white'>Sign up</Text>
                         </Button>
                         <Button
-                            borderColor='#DB1E36'
+                            borderColor='#DC2626'
                             borderWidth={1}
                             backgroundColor="$white"
                             borderRadius={50}
@@ -56,7 +56,7 @@ const AuthHomeScreen = () => {
 
                         >
                             <Text
-                                color='#DB1E36'
+                                color='#DC2626'
                             >
                                 Log in
                             </Text>
@@ -66,9 +66,9 @@ const AuthHomeScreen = () => {
                     <Box alignItems="center">
                         <Text fontWeight={400} fontSize={14} marginBottom={5} color='#5A5A5A'>By continuing you accept our</Text>
                         <Text >
-                            <Text fontWeight={400} fontSize={14} color='#DB1E36'> Terms of Service </Text>
+                            <Text fontWeight={400} fontSize={14} color='#DC2626'> Terms of Service </Text>
                             <Text fontWeight={400} fontSize={14} color='#5A5A5A'> and </Text>
-                            <Text fontWeight={400} fontSize={14} color='#DB1E36'> Privacy Policy</Text>
+                            <Text fontWeight={400} fontSize={14} color='#DC2626'> Privacy Policy</Text>
                         </Text>
                     </Box>
                 </VStack>

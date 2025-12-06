@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form"
 import { useCreateEntity } from '@/src/api/queries';
 import { Input, InputField, Text, VStack, Spinner, Box } from "@gluestack-ui/themed";
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import PhoneNumberInput from '../form/PhoneInput';
 import SignupModal from './Modal';
 import PageHeader from '../PageHeader';
@@ -20,7 +21,6 @@ const Signup = () => {
             password: ''
         }
     });
-
 
     const { handleCreateEntity, isLoading, data } = useCreateEntity<IUserRead, IUserWrite>({ entity: "users/signup", requiresToken: false })
 
@@ -70,7 +70,11 @@ const Signup = () => {
     return (
         <>
             <SignupModal phoneNumber={data?.phone_number} isOpen={showModal} onClose={toggleModal} />
-            <VStack paddingBottom={50} flex={1} >
+            <TouchableWithoutFeedback onPress={() => {
+                console.log('Dismissing keyboard');
+                Keyboard.dismiss();
+            }}>
+            <View style={{ flex: 1, paddingBottom: 50 }}>
                 <PageHeader value={progress} />
                 <VStack marginTop={24} paddingHorizontal={24} flex={1}>
                     <Text color="#2A2A2A" lineHeight={28} fontSize={22} fontWeight={600}>
@@ -81,7 +85,12 @@ const Signup = () => {
                     </Text>
                     <VStack flex={1} justifyContent="space-between">
                         <Box>
-                            <PhoneNumberInput control={control} />
+                            <PhoneNumberInput
+                                control={control}
+                                onSubmitEditing={() => {
+                                    Keyboard.dismiss();
+                                }}
+                            />
 
                             <VStack space="xs" marginTop={24}>
                                 <Text fontSize={16} color="#414141">
@@ -103,6 +112,10 @@ const Signup = () => {
                                                 onChangeText={onChange}
                                                 value={value}
                                                 secureTextEntry
+                                                returnKeyType="done"
+                                                onSubmitEditing={() => {
+                                                    Keyboard.dismiss();
+                                                }}
                                             />
                                         </Input>
                                     )}
@@ -116,7 +129,7 @@ const Signup = () => {
                         </Box>
 
                         <Button
-                            backgroundColor={isFormValid ? "#DB1E36" : "#B8B8B8"}
+                            backgroundColor={isFormValid ? "#DC2626" : "#B8B8B8"}
                             borderRadius={50}
                             height={56}
                             width="$full"
@@ -136,7 +149,8 @@ const Signup = () => {
                         </Button>
                     </VStack>
                 </VStack>
-            </VStack>
+            </View>
+            </TouchableWithoutFeedback>
         </>
     );
 };

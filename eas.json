@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 10.1.1"
+    "version": ">= 10.1.1",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -8,11 +9,17 @@
       "distribution": "internal"
     },
     "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview-expo-go": {
       "distribution": "internal"
     },
     "production": {
       "android": {
-        "gradleCommand": ":app:assembleRelease" 
+        "gradleCommand": ":app:assembleRelease"
       }
     }
   },

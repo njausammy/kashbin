@@ -46,7 +46,7 @@ const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
                         </Text>
                         <Text alignSelf="center" lineHeight={19} color="#5A5A5A" fontSize={14} fontWeight={600}>{formatPhoneNumber(phoneNumber)}</Text>
                         <Button
-                            backgroundColor="#DB1E36"
+                            backgroundColor="#DC2626"
                             borderRadius={50}
                             height={56}
                             width="100%"
@@ -62,7 +62,7 @@ const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
                             backgroundColor="$white"
                             borderRadius={50}
                             borderWidth={1}
-                            borderColor="#DB1E36"
+                            borderColor="#DC2626"
                             height={56}
                             width="$full"
                             marginBottom={40}
@@ -70,7 +70,7 @@ const SignupModal = ({ onClose, isOpen, phoneNumber }: Iprops) => {
                             onPress={onClose}
                         >
                             <Text
-                                color="#DB1E36"
+                                color="#DC2626"
                             >
                                 No
                             </Text>

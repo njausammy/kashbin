@@ -11,7 +11,7 @@ const PageHeader = ({ value, hideProgressBar, ...others }: { value: number, hide
                 <Text>Back</Text>
             </Pressable>
             {!hideProgressBar && <Progress value={value} width="$full" height={4} size="md" backgroundColor='#F7F7F7' >
-                <ProgressFilledTrack backgroundColor='#DB1E36' />
+                <ProgressFilledTrack backgroundColor='#DC2626' />
             </Progress>}
         </Box>
     )

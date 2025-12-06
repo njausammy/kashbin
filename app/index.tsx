@@ -1,43 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import Constants from 'expo-constants';
 import { router } from 'expo-router';
 import SplashScreen from "@/src/components/SplashScreen";
 import LocalStorage from "@/src/utils/LocalStorage";
+import localDB from "@/src/utils/LocalDatabase";
 
-const isDeveloperMode = Constants.expoConfig?.extra?.DEVELOPER_MODE;
+// DEVELOPER MODE: Set to true to clear storage and reset app on launch
+const CLEAR_STORAGE_ON_LAUNCH = false;
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [hasOnboarded, setHasOnboarded] = useState(false);
 
   useEffect(() => {
-    const checkOnboarding = async () => {
-      if (isDeveloperMode) {
-        await LocalStorage.removeItem('hasOnboarded');
+    const checkAppState = async () => {
+      try {
+        // Developer mode: Clear all storage
+        if (CLEAR_STORAGE_ON_LAUNCH) {
+          console.log('🔧 DEVELOPER MODE: Clearing all storage...');
+          await localDB.clearAllUsers();
+          await LocalStorage.removeItem('hasOnboarded');
+          console.log('✅ Storage cleared successfully');
+        }
+
+        // Check if user has completed onboarding
+        const hasOnboarded = await LocalStorage.getItem('hasOnboarded');
+
+        // Check if user is logged in
+        const currentUser = await localDB.getCurrentUser();
+
+        if (!hasOnboarded || hasOnboarded !== 'onboard') {
+          // First time user - show onboarding
+          router.replace('/onboarding');
+        } else if (currentUser) {
+          // User is logged in - go to dashboard
+          router.replace('/main');
+        } else {
+          // User has onboarded but not logged in
+          router.replace('/auth/phone');
+        }
+      } catch (error) {
+        console.error('Error checking app state:', error);
+        router.replace('/onboarding');
+      } finally {
+        setIsLoading(false);
       }
-      const value = await LocalStorage.getItem('hasOnboarded');
-      if (value === 'onboard') {
-        setHasOnboarded(true);
-      }
-      setIsLoading(false);
     };
 
-    checkOnboarding();
+    checkAppState();
   }, []);
-
-  useEffect(() => {
-    if (!isLoading) {
-      if (!hasOnboarded) {
-        router.replace('/main/home/contacts');
-      } else {
-        router.replace('/auth/login');
-      }
-    }
-  }, [isLoading, hasOnboarded, router]);
 
   if (isLoading) {
     return <SplashScreen />
   }
+
+  return null;
 };
 
 export default App;

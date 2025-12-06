@@ -180,7 +180,7 @@ const HomeHeader = () => {
 
     return (
         <Box backgroundColor='#fff'>
-            <Box marginBottom={10} backgroundColor="#DB1E36" paddingBottom={10} paddingHorizontal={10}>
+            <Box marginBottom={10} backgroundColor="#DC2626" paddingBottom={10} paddingHorizontal={10}>
                 {renderTopBarHeader()}
                 <Card paddingVertical={10} backgroundColor='#FFFFFF'>
                     <TopNavigation onNavigate={handleNavigation} />

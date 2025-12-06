@@ -2,7 +2,7 @@ import React from "react";
 import { Svg, G, Path, Defs, ClipPath } from "react-native-svg";
 
 const Icon: React.FC<{ color?: string; width?: number; height?: number }> = ({
-  color = "#DB1E36",
+  color = "#DC2626",
   width = 32,
   height = 32,
 }) => {

@@ -3,8 +3,9 @@ import { Controller } from 'react-hook-form';
 import CountryPicker from 'react-native-country-picker-modal';
 import { CountryCode, Country } from 'react-native-country-picker-modal';
 import { Box, HStack, VStack, Text, Input, InputField } from '@gluestack-ui/themed';
+import { Keyboard } from 'react-native';
 
-const PhoneNumberInput = ({ control }: {control:any}) => {
+const PhoneNumberInput = ({ control, onSubmitEditing }: {control:any, onSubmitEditing?: () => void}) => {
   const [countryCode, setCountryCode] = useState<CountryCode>('KE');
   const [callingCode, setCallingCode] = useState<string>('+254');
 
@@ -35,17 +36,31 @@ const PhoneNumberInput = ({ control }: {control:any}) => {
         <Controller
           name="phone"
           control={control}
+          defaultValue=""
           render={({ field: { onChange, value } }) => (
             <Input
               borderWidth={1}
+              borderColor={value && value.length >= 9 ? "#1E40AF" : "#B8B8B8"}
               borderRadius={8}
               height={48}
               flex={1}
+              backgroundColor="$white"
             >
-              <InputField 
-                placeholder="Mobile number" 
+              <InputField
+                placeholder="712345678"
                 onChangeText={onChange}
-                value={value}
+                value={value || ''}
+                keyboardType="numeric"
+                autoComplete="tel"
+                color="#2A2A2A"
+                fontSize={16}
+                returnKeyType="done"
+                onSubmitEditing={() => {
+                  Keyboard.dismiss();
+                  if (onSubmitEditing) {
+                    onSubmitEditing();
+                  }
+                }}
               />
             </Input>
           )}

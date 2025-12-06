@@ -51,7 +51,7 @@ const LocationStatusScreen = () => {
                                 locationState === 'success' ? "Congratulations! Your address is ready for use." :
                                     "Location not found. Retry"}
                         </Text >
-                        {locationState === "failed" && <Pressable onPress={handleRetry}><Text color='#DB1E36' fontSize={14}> Locate Me</Text></Pressable>}
+                        {locationState === "failed" && <Pressable onPress={handleRetry}><Text color='#DC2626' fontSize={14}> Locate Me</Text></Pressable>}
                     </HStack>
                 </VStack>
 
@@ -84,7 +84,7 @@ const LocationStatusScreen = () => {
                     </Card>
                     {locationState === 'failed' && (
                         <Button
-                            backgroundColor="#DB1E36"
+                            backgroundColor="#DC2626"
                             borderRadius={50}
                             paddingHorizontal={10}
                             height={56}

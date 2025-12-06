@@ -1,7 +1,5 @@
-import Login from "@/src/components/auth/login";
+import { Redirect } from 'expo-router';
 
 export default function LoginScreen() {
-  return (
-    <Login />
-  );
+  return <Redirect href="/auth/login-phone" />;
 }

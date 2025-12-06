@@ -37,7 +37,7 @@ const GeoLocationScreen = ({ onLocationFound }: IProps) => {
                         <Loader iconPosition="top" disableAnimation iconComp={<LocationAvatar />} />
                         <VStack width="100%">
                             <Button
-                                backgroundColor="#DB1E36"
+                                backgroundColor="#DC2626"
                                 borderRadius={50}
                                 paddingHorizontal={10}
                                 height={56}
@@ -48,7 +48,7 @@ const GeoLocationScreen = ({ onLocationFound }: IProps) => {
                                 <Text color='white'>Locate Me</Text>
                             </Button>
                             <Button
-                                borderColor='#DB1E36'
+                                borderColor='#DC2626'
                                 borderWidth={1}
                                 backgroundColor="$white"
                                 borderRadius={50}
@@ -58,7 +58,7 @@ const GeoLocationScreen = ({ onLocationFound }: IProps) => {
                                 onPress={handleEnterAddress}
                                 marginBottom={16}
                             >
-                                <Text color='#DB1E36'>Enter Address Manually</Text>
+                                <Text color='#DC2626'>Enter Address Manually</Text>
                             </Button>
                         </VStack>
                     </VStack>

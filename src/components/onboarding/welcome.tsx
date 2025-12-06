@@ -40,7 +40,7 @@ const HomeScreen = () => {
                 </Text>
             </Box>
             <Button
-                backgroundColor="#DB1E36"
+                backgroundColor="#DC2626"
                 borderRadius={50}
                 paddingHorizontal={10}
                 height={56}

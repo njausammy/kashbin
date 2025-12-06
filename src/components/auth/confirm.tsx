@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, Card, HStack, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import { Keyboard } from 'react-native';
 import Button from '@/src/components/form/AnimatedButton';
 import { router } from 'expo-router';
 import PageHeader from '../PageHeader';
@@ -82,7 +83,7 @@ const ConfirmSignup = () => {
                                         key={index}
                                         width={40}
                                         height={40}
-                                        borderColor={digit?.length ? "#DB1E36" : "#B8B8B8"}
+                                        borderColor={digit?.length ? "#DC2626" : "#B8B8B8"}
                                         borderWidth={0}
                                         borderBottomWidth={1}
                                     >
@@ -90,10 +91,12 @@ const ConfirmSignup = () => {
                                             ref={el => (inputRefs.current[index] = el)}
                                             textAlign="center"
                                             fontSize="$xl"
-                                            keyboardType="number-pad"
+                                            keyboardType="numeric"
                                             maxLength={1}
                                             value={digit}
                                             onChangeText={(value) => handleCodeChange(index, value)}
+                                            returnKeyType="done"
+                                            onSubmitEditing={() => Keyboard.dismiss()}
                                         />
                                     </Input>
                                 ))}
@@ -101,7 +104,7 @@ const ConfirmSignup = () => {
                         </Box>
                         <Text marginTop={32} alignSelf='center'>
                             <Text fontWeight={400} fontSize={16} color='#5A5A5A'> Didn’t get a code? </Text>
-                            <Text fontWeight={400} fontSize={16} color={isResendDisabled ? '#B8B8B8' : '#DB1E36'}> Resend</Text>
+                            <Text fontWeight={400} fontSize={16} color={isResendDisabled ? '#B8B8B8' : '#DC2626'}> Resend</Text>
                         </Text>
                     </VStack>
                     {verificationState !== "idle" && <Card size="lg" variant="outline">
@@ -125,7 +128,7 @@ const ConfirmSignup = () => {
                         }
                     </Card>}
                     <Button
-                        backgroundColor={isButtonDisabled ? "#B8B8B8" : "#DB1E36"}
+                        backgroundColor={isButtonDisabled ? "#B8B8B8" : "#DC2626"}
                         disabled={isButtonDisabled}
                         borderRadius={50}
                         height={56}
