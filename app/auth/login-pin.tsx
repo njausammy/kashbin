@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Text, VStack, HStack, Spinner, Box, Pressable, Input, InputField } from "@gluestack-ui/themed";
+import { Keyboard } from 'react-native';
 import PageHeader from '@/src/components/PageHeader';
 import Button from '@/src/components/form/AnimatedButton';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -42,7 +43,7 @@ const LoginPIN = () => {
                 await LocalStorage.setItem('hasOnboarded', 'onboard');
 
                 setIsLoading(false);
-                router.replace('/main');
+                router.replace('/main/home');
             } else {
                 // Invalid credentials
                 setIsLoading(false);
@@ -100,6 +101,8 @@ const LoginPIN = () => {
                                             fontSize={24}
                                             fontWeight={600}
                                             secureTextEntry
+                                            returnKeyType="done"
+                                            onSubmitEditing={() => Keyboard.dismiss()}
                                         />
                                     </Input>
                                 </Box>

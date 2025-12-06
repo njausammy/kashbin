@@ -35,7 +35,7 @@ const KYCPrompt = () => {
     };
 
     const handleSkip = () => {
-        router.replace('/main');
+        router.replace('/main/home');
     };
 
     return (

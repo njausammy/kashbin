@@ -8,7 +8,7 @@ import Button from '@/src/components/form/AnimatedButton';
 import { Colors } from '@/src/constants/Colors';
 const Pending = () => {
     const handleGoToDashboard = () => {
-        router.replace('/main');
+        router.replace('/main/home');
     };
 
     return (

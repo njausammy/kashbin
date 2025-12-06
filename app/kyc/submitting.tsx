@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { VStack, Text, Box, Spinner } from "@gluestack-ui/themed";
+import { VStack, HStack, Text, Box, Spinner } from "@gluestack-ui/themed";
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import localDB from '@/src/utils/LocalDatabase';

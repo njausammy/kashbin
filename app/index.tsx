@@ -32,7 +32,7 @@ const App: React.FC = () => {
           router.replace('/onboarding');
         } else if (currentUser) {
           // User is logged in - go to dashboard
-          router.replace('/main');
+          router.replace('/main/home');
         } else {
           // User has onboarded but not logged in
           router.replace('/auth/phone');

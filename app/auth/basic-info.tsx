@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import { Text, VStack, HStack, Spinner, Box, Pressable, Input, InputField } from "@gluestack-ui/themed";
+import { Keyboard } from 'react-native';
 import PageHeader from '@/src/components/PageHeader';
 import Button from '@/src/components/form/AnimatedButton';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -104,6 +105,8 @@ const BasicInfo = () => {
                                             onChangeText={onChange}
                                             value={value}
                                             fontSize={16}
+                                            returnKeyType="done"
+                                            onSubmitEditing={() => Keyboard.dismiss()}
                                         />
                                     </Input>
                                 )}
@@ -131,6 +134,8 @@ const BasicInfo = () => {
                                             onChangeText={onChange}
                                             value={value}
                                             fontSize={16}
+                                            returnKeyType="done"
+                                            onSubmitEditing={() => Keyboard.dismiss()}
                                         />
                                     </Input>
                                 )}

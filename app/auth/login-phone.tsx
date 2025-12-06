@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form"
 import { Text, VStack, HStack, Spinner, Box, Pressable } from "@gluestack-ui/themed";
+import { Keyboard } from 'react-native';
 import PhoneNumberInput from '@/src/components/form/PhoneInput';
 import PageHeader from '@/src/components/PageHeader';
 import Button from '@/src/components/form/AnimatedButton';
@@ -10,9 +11,6 @@ import { Ionicons } from '@expo/vector-icons';
 import localDB from '@/src/utils/LocalDatabase';
 import LocalStorage from '@/src/utils/LocalStorage';
 import { Colors } from '@/src/constants/Colors';
-interface IFormValues {
-    phone: string
-}
 
 const LoginPhone = () => {
     const { control, watch } = useForm({
@@ -29,7 +27,7 @@ const LoginPhone = () => {
 
     useEffect(() => {
         // More lenient validation - at least 9 digits (Kenyan numbers)
-        const isValid = phone && phone.trim().length >= 9;
+        const isValid = typeof phone === 'string' && phone.trim().length >= 9;
         setIsFormValid(isValid);
         setError(''); // Clear error when phone changes
 
@@ -53,11 +51,12 @@ const LoginPhone = () => {
                 await LocalStorage.setItem('hasOnboarded', 'onboard');
 
                 setIsLoading(false);
-                router.replace('/main');
+                router.replace('/main/home');
             } else {
                 setIsLoading(false);
                 setError('No account found with this phone number. Please sign up first.');
             }
+
         } catch (err) {
             console.error('Login phone check error:', err);
             setIsLoading(false);
@@ -85,7 +84,7 @@ const LoginPhone = () => {
                 {/* Form */}
                 <VStack flex={1} justifyContent="space-between">
                     <Box>
-                        <PhoneNumberInput control={control} />
+                        <PhoneNumberInput control={control} onSubmitEditing={() => Keyboard.dismiss()} />
 
                         {/* Error Message */}
                         {error && (

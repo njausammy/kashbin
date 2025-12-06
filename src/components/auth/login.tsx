@@ -33,15 +33,15 @@ const Login = () => {
                 password: data.password
             })
             if (result?.succes) {
-                router.push('/main')
+                router.push('/main/home')
             }
             else {
-                router.push('/maiin')
+                router.push('/main/home')
                 // setError(result?.message)
             }
             setIsLoading(false)
         } catch (error) {
-            router.push('/main')
+            router.push('/main/home')
         }
     }
 
